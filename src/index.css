@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply m-0 font-inter text-gray-900 bg-cream-100 antialiased;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  /* Simplified CTA Buttons */
+  .cta-gold {
+    @apply px-8 py-3 rounded-lg font-medium text-base transition-all duration-200;
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+  }
+
+  .cta-gold:hover {
+    background: #2563eb;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  .cta-gold:active {
+    transform: translateY(1px);
+  }
+
+  .cta-outline {
+    @apply px-8 py-3 rounded-lg font-medium text-base transition-all duration-200;
+    background: transparent;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+  }
+
+  .cta-outline:hover {
+    background: #3b82f6;
+    color: white;
+  }
+
+  /* Legacy button styles for compatibility */
+  .btn-primary {
+    @apply cta-gold;
+  }
+
+  .btn-secondary {
+    @apply cta-outline;
+  }
+
+  /* Simplified Glass Effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-card {
+    @apply glass-effect rounded-xl p-5 transition-all duration-200;
+  }
+
+  .glass-card-hover {
+    @apply glass-card;
+  }
+
+  .glass-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Simplified Card Design */
+  .premium-card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden;
+  }
+
+  .premium-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.12);
+  }
+
+  /* Room Card Specific */
+  .room-card {
+    @apply premium-card;
+    position: relative;
+  }
+
+  .room-card .image-container {
+    @apply relative overflow-hidden;
+    height: 250px;
+  }
+
+  .room-card .overlay-gradient {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg,
+      rgba(30, 64, 175, 0.7) 0%,
+      rgba(59, 130, 246, 0.6) 100%
+    );
+  }
+
+  .room-card:hover .overlay-gradient {
+    opacity: 1;
+  }
+
+  .room-card .price-badge {
+    @apply absolute top-4 right-4 glass-effect px-4 py-2 rounded-full text-white font-semibold;
+  }
+
+  /* Hero Gradient Overlay */
+  .hero-overlay {
+    background: linear-gradient(135deg,
+      rgba(30, 64, 175, 0.7) 0%,
+      rgba(59, 130, 246, 0.6) 100%
+    );
+  }
+
+  /* Section Padding */
+  .section-padding {
+    @apply py-16 px-4 md:px-8 lg:px-16;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  /* Floating Animation */
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Page Transition */
+  .page-transition {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  /* Scroll Animation */
+  .scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #faf8f2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2563eb;
+  }
+}
+
+@layer utilities {
+  /* Perspective for 3D effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
