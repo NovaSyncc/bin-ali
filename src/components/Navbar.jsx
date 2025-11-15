@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logo from '../assets/images/logo.png';
 
 const Navbar = ({ onBookNow }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,13 +45,17 @@ const Navbar = ({ onBookNow }) => {
         <div className="flex items-center justify-between h-20 px-4">
           {/* Logo */}
           <div className="flex items-center">
-            <Link
-              to="/"
-              className={`text-2xl font-bold transition-colors ${
+            <Link to="/" className="flex items-center gap-3">
+              <img
+                src={logo}
+                alt="Bin Ali Hotel Logo"
+                className="h-12 w-auto object-contain"
+              />
+              <span className={`text-xl font-bold transition-colors hidden sm:block ${
                 isScrolled ? 'text-primary-green' : 'text-white'
-              }`}
-            >
-              Bin Ali Hotel
+              }`}>
+                Bin Ali Hotel
+              </span>
             </Link>
           </div>
 

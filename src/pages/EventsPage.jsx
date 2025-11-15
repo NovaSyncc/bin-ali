@@ -11,8 +11,8 @@ const EventsPage = () => {
   const venueFeatures = [
     {
       icon: Users,
-      title: '200+ Guest Capacity',
-      description: 'Our spacious venue comfortably accommodates over 200 guests with flexible seating arrangements.'
+      title: '300-350 Guest Capacity',
+      description: 'Each of our two spacious halls comfortably accommodates 300-350 guests with flexible seating arrangements.'
     },
     {
       icon: Utensils,
@@ -128,8 +128,74 @@ const EventsPage = () => {
         </div>
       </section>
 
-      {/* Event Types Section */}
+      {/* Our Event Halls Section */}
       <section className="section-padding bg-cream-100">
+        <div className="container-custom">
+          <div className="text-center mb-12 scroll-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-4">
+              Our Event Halls
+            </h2>
+            <p className="text-base text-gray-600 max-w-2xl mx-auto mb-8">
+              We have two spacious halls, each designed to host your special events with comfort and style
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Bin-Ali Hall One */}
+            <div className="premium-card p-6 scroll-fade-in">
+              <h3 className="text-2xl font-bold text-primary-dark-green mb-4">Bin-Ali Hall One</h3>
+              <p className="text-gray-600 mb-4">
+                Our first hall features modern amenities and elegant design, perfect for weddings, corporate events, and celebrations.
+              </p>
+              <div className="flex items-center gap-2 mb-4">
+                <Users size={20} className="text-accent-gold" />
+                <span className="font-semibold text-gray-700">Capacity: 300-350 guests</span>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/YOUR_HALL_ONE_VIDEO_ID"
+                  title="Bin-Ali Hall One Virtual Tour"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <p className="text-center text-sm text-gray-500 mt-3">
+                * Replace YOUR_HALL_ONE_VIDEO_ID with actual YouTube video ID
+              </p>
+            </div>
+
+            {/* Bin-Ali Hall Two */}
+            <div className="premium-card p-6 scroll-fade-in" style={{ animationDelay: '0.1s' }}>
+              <h3 className="text-2xl font-bold text-primary-dark-green mb-4">Bin-Ali Hall Two</h3>
+              <p className="text-gray-600 mb-4">
+                Our second hall offers the same exceptional facilities with versatile space configuration for any event type.
+              </p>
+              <div className="flex items-center gap-2 mb-4">
+                <Users size={20} className="text-accent-gold" />
+                <span className="font-semibold text-gray-700">Capacity: 300-350 guests</span>
+              </div>
+              <div className="relative rounded-xl overflow-hidden shadow-lg" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/YOUR_HALL_TWO_VIDEO_ID"
+                  title="Bin-Ali Hall Two Virtual Tour"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <p className="text-center text-sm text-gray-500 mt-3">
+                * Replace YOUR_HALL_TWO_VIDEO_ID with actual YouTube video ID
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Event Types Section */}
+      <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center mb-16 scroll-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-4">

@@ -104,7 +104,7 @@ const Home = ({ onBookNow }) => {
             Welcome to Bin Ali Hotel
           </h1>
           <p className="text-xl md:text-2xl mb-4" style={{ animationDelay: '0.2s' }}>
-            Comfortable Stay in the Heart of Eastleigh
+            Clean, Comfort and Affordable at the Heart of Eastleigh
           </p>
           <p className="text-base md:text-lg mb-8 text-gray-200 max-w-3xl mx-auto" style={{ animationDelay: '0.3s' }}>
             Cozy Rooms • Event Venue • Somali Weddings
