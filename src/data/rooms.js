@@ -5,12 +5,9 @@ import single1 from '../assets/images/Single/sing1.jpg';
 import single2 from '../assets/images/Single/2.jpg';
 import single3 from '../assets/images/Single/3.jpg';
 
-import standardJing1 from '../assets/images/Standard Jing/standard1.jpg';
-import standardJing2 from '../assets/images/Standard Jing/standadr2.jpg';
-import standardJing3 from '../assets/images/Standard Jing/dtnf3.jpg';
-import standardJing4 from '../assets/images/Standard Jing/Stand.jpg';
-import standardJing5 from '../assets/images/Standard Jing/2.jpg';
-import standardJing6 from '../assets/images/Standard Jing/23.jpg';
+import standardJing1 from '../assets/images/Standard Jing/Stand.jpg';
+import standardJing2 from '../assets/images/Standard Jing/2.jpg';
+import standardJing3 from '../assets/images/Standard Jing/23.jpg';
 
 import standardDouble1 from '../assets/images/Standard double/standarddouble1.jpg';
 import standardDouble2 from '../assets/images/Standard double/stand d2.jpg';
@@ -54,7 +51,7 @@ export const rooms = [
     capacity: 2,
     description: "Comfortable standard room with modern amenities",
     image: standardJing1,
-    images: [standardJing1, standardJing2, standardJing3, standardJing4, standardJing5, standardJing6]
+    images: [standardJing1, standardJing2, standardJing3]
   },
   {
     id: 3,

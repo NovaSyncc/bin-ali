@@ -245,7 +245,7 @@ const Contact = () => {
                   </p>
                 </div>
                 <a
-                  href="https://maps.google.com"
+                  href="https://maps.app.goo.gl/h8TjWypRjA7kG8bg8"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -282,16 +282,16 @@ const Contact = () => {
                 boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
               }}
             >
-              {/* TODO: Replace with actual Google Maps embed for Eighth St, Nairobi, Eastleigh */}
+              {/* Google Maps Embed - Bin Ali Hotel & Restaurant, Eastleigh */}
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8176449742574!2d36.8373!3d-1.2833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTYnNTkuOSJTIDM2wrA1MCcxNC4zIkU!5e0!3m2!1sen!2ske!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817644974!2d36.847878!3d-1.2755184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f16b4246e261d%3A0xb01368ac3008de6!2sBin%20Ali%20Hotel%20%26%20Restaurant!5e0!3m2!1sen!2ske!4v1732113600000!5m2!1sen!2ske"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: '500px' }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Bin Ali Hotel Location"
+                title="Bin Ali Hotel & Restaurant - Eighth St, Eastleigh, Nairobi"
               />
             </div>
             <p

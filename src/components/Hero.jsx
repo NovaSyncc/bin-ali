@@ -180,14 +180,14 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
           </div>
         </motion.div>
 
-        {/* YouTube Video Panel - Right Side */}
+        {/* Video Panel - Right Side */}
         <motion.div
           className="hero-image-panel"
           variants={imagePanelVariants}
         >
           <div className="hero-image-container">
             <div className="hero-slideshow">
-              {/* Fallback Image */}
+              {/* Fallback Poster Image */}
               <img
                 src={receptionImage}
                 alt="Bin Ali Hotel - Luxury Wedding Venue"
@@ -195,16 +195,23 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
                 loading="eager"
               />
 
-              {/* YouTube Video Embed */}
+              {/* Local Video - Full Container Fill */}
               <div className="absolute inset-0 z-[1]">
-                <iframe
-                  src="https://www.youtube.com/embed/mCe9H83Mo-o?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1&playlist=mCe9H83Mo-o&playsinline=1"
-                  className="absolute inset-0 w-full h-full pointer-events-none youtube-hero-video"
-                  frameBorder="0"
-                  allow="autoplay; encrypted-media"
-                  title="Bin Ali Hotel Tour"
-                  loading="lazy"
-                />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={receptionImage}
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                >
+                  <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/HeroloopPotrait.MOV" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
 
               {/* Dark overlay for readability */}

@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import PageTransition from './shared/PageTransition';
 
-// Placeholder video/image paths - REPLACE WITH ACTUAL
-import hallVideo1 from '../assets/videos/hall1.mp4';
+// Wedding Hall Video Assets
 import hallImage1 from '../assets/images/cover/reception.jpg';
 import hallImage2 from '../assets/images/cover/herobackground.webp';
 
@@ -13,8 +12,8 @@ const weddingHallsData = [
     id: 1,
     name: "Grand Classic Hall",
     somaliName: "Qolka Weyn ee Classic",
-    capacity: "300 Guests",
-    somaliCapacity: "300 Qof",
+    capacity: "300-350 Guests",
+    somaliCapacity: "300-350 Qof",
     description: "Our largest wedding hall featuring traditional Somali décor, premium lighting, and spacious dance floor. Perfect for grand celebrations with family and friends.",
     features: [
       "Premium stage setup",
@@ -26,16 +25,17 @@ const weddingHallsData = [
     ],
     media: {
       type: "video",
-      src: hallVideo1,
-      poster: hallImage1 // Fallback image for video
+      src: "https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/firsthall_lanscape.mp4",
+      poster: hallImage1, // Fallback image for video
+      orientation: "landscape"
     }
   },
   {
     id: 2,
     name: "Elegant Boutique Hall",
     somaliName: "Qolka Yar ee Elegant",
-    capacity: "150 Guests",
-    somaliCapacity: "150 Qof",
+    capacity: "300-350 Guests",
+    somaliCapacity: "300-350 Qof",
     description: "Intimate and refined space ideal for smaller, elegant celebrations. Features modern amenities with traditional Somali warmth and hospitality.",
     features: [
       "Intimate atmosphere",
@@ -46,9 +46,12 @@ const weddingHallsData = [
       "Climate controlled"
     ],
     media: {
-      type: "image",
-      src: hallImage2,
-      alt: "Elegant Boutique Hall"
+      type: "video",
+      src: "https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/SecondHallPortrait.MP4",
+      poster: hallImage2,
+      alt: "Elegant Boutique Hall",
+      orientation: "portrait",
+      startTime: 3 // Start playback from 3 seconds
     }
   }
 ];
@@ -123,7 +126,7 @@ const WeddingHalls = ({ language = 'en' }) => {
                 }}
               >
                 {/* Media Container */}
-                <div className="h-[300px] md:h-[400px] relative overflow-hidden">
+                <div className="h-[300px] md:h-[400px] relative overflow-hidden bg-slate-black">
                   {hall.media.type === "video" ? (
                     <>
                       <video
@@ -133,9 +136,19 @@ const WeddingHalls = ({ language = 'en' }) => {
                         loop
                         muted
                         playsInline
-                        className="w-full h-full object-cover"
+                        onLoadedMetadata={(e) => {
+                          // Set start time for Second Hall video only
+                          if (hall.media.startTime) {
+                            e.target.currentTime = hall.media.startTime;
+                          }
+                        }}
+                        className="w-full h-full"
+                        style={{
+                          objectFit: hall.media.orientation === 'portrait' ? 'contain' : 'cover',
+                          objectPosition: 'center'
+                        }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-black/70 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-black/70 to-transparent pointer-events-none"></div>
                     </>
                   ) : (
                     <img
@@ -145,7 +158,7 @@ const WeddingHalls = ({ language = 'en' }) => {
                     />
                   )}
                   {/* Capacity Badge */}
-                  <div className="absolute top-6 right-6 bg-gold-premium/95 backdrop-blur-sm text-navy-deepest px-4 py-2 rounded-full font-bold text-sm">
+                  <div className="absolute top-6 right-6 bg-gold-premium/95 backdrop-blur-sm text-navy-deepest px-4 py-2 rounded-full font-bold text-sm z-10">
                     {language === 'so' ? 'Awood: ' : 'Capacity: '}
                     {language === 'so' ? hall.somaliCapacity : hall.capacity}
                   </div>

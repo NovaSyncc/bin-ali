@@ -56,7 +56,7 @@ const GalleryPage = () => {
         backgroundImage={receptionImage}
       />
 
-      {/* YouTube Video Section */}
+      {/* Video Section - Virtual Tour */}
       <section className="bg-gradient-to-br from-navy-deepest via-midnight-blue to-navy-deepest py-24">
         <div className="container-custom">
           <div className="text-center mb-12">
@@ -69,15 +69,22 @@ const GalleryPage = () => {
           </div>
 
           <div className="max-w-4xl mx-auto premium-glass-card p-6">
-            <div className="relative rounded-xl overflow-hidden shadow-xl aspect-video">
-              <iframe
+            <div className="relative rounded-xl overflow-hidden shadow-xl aspect-video bg-slate-black">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
                 className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/1LDM66mgDFI"
-                title="Bin Ali Hotel Virtual Tour"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center'
+                }}
+              >
+                <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/firsthall_lanscape.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>

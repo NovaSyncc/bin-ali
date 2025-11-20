@@ -166,7 +166,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-gold-premium text-sm hover:text-gold-warm transition-colors duration-300"
             >
-              Built with ❤️ by Deegaan Riyo
+              Developed by Deegaan Riyo Digital Solutions
             </a>
           </div>
         </div>

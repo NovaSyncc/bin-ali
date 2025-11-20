@@ -19,7 +19,7 @@ import ContactPage from './pages/ContactPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Overview from './pages/Dashboard/Overview';
 import Bookings from './pages/Dashboard/Bookings';
-// // import BlogPosts from './pages/Dashboard/BlogPosts';
+import BlogPosts from './pages/Dashboard/BlogPosts';
 import ContactMessages from './pages/Dashboard/ContactMessages';
 import Settings from './pages/Dashboard/Settings';
 import BlogListing from './pages/Blog/BlogListing';
@@ -95,7 +95,7 @@ function App() {
                 <Route index element={<Overview />} /> {/* Default child route for /manager */}
                 <Route path="overview" element={<Overview />} />
                 <Route path="bookings" element={<Bookings />} />
-                {/* <Route path="blog-posts" element={<BlogPosts />} /> */}
+                <Route path="blog-posts" element={<BlogPosts />} />
                 <Route path="contact-messages" element={<ContactMessages />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
