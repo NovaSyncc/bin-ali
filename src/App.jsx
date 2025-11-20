@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { initScrollObserver } from './utils/scrollObserver';
 
@@ -7,7 +7,7 @@ import { initScrollObserver } from './utils/scrollObserver';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BookingForm from './components/BookingForm';
-import EventBookingForm from './components/EventBookingForm'; // Import EventBookingForm
+import EventBookingForm from './components/EventBookingForm';
 
 // Pages
 import Home from './pages/Home';
@@ -48,7 +48,7 @@ function App() {
   const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [isEventBookingFormOpen, setIsEventBookingFormOpen] = useState(false);
-  const [language, setLanguage] = useState('en'); // New language state
+  const [language, setLanguage] = useState('en');
 
   const handleBookNow = (room = null) => {
     setSelectedRoom(room);
@@ -73,54 +73,51 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <ScrollObserverWrapper>
-        <div className="min-h-screen">
-          <Navbar onBookNow={handleBookNow} language={language} onLanguageChange={handleLanguageChange} />
+    <ScrollObserverWrapper>
+      <div className="min-h-screen">
+        <Navbar onBookNow={handleBookNow} language={language} onLanguageChange={handleLanguageChange} />
 
-          <AnimatePresence mode="wait">
-            <Routes>
-              {/* Pass handleBookEventHall to Home component */}
-              <Route path="/" element={<Home onBookNow={handleBookNow} onBookEventHall={handleBookEventHall} language={language} />} />
-              <Route path="/rooms" element={<RoomsPage onBookNow={handleBookNow} language={language} />} />
-              <Route path="/about" element={<AboutPage language={language} />} />
-              <Route path="/events" element={<EventsPage language={language} />} />
-              <Route path="/gallery" element={<GalleryPage language={language} />} />
-              <Route path="/contact" element={<ContactPage language={language} />} />
-              <Route path="/blog" element={<BlogListing language={language} />} />
-              <Route path="/blog/:slug" element={<BlogPost language={language} />} />
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<Home onBookNow={handleBookNow} onBookEventHall={handleBookEventHall} language={language} />} />
+            <Route path="/rooms" element={<RoomsPage onBookNow={handleBookNow} language={language} />} />
+            <Route path="/about" element={<AboutPage language={language} />} />
+            <Route path="/events" element={<EventsPage language={language} />} />
+            <Route path="/gallery" element={<GalleryPage language={language} />} />
+            <Route path="/contact" element={<ContactPage language={language} />} />
+            <Route path="/blog" element={<BlogListing language={language} />} />
+            <Route path="/blog/:slug" element={<BlogPost language={language} />} />
 
-              {/* Dashboard Routes */}
-              <Route path="/manager" element={<Dashboard />}>
-                <Route index element={<Overview />} /> {/* Default child route for /manager */}
-                <Route path="overview" element={<Overview />} />
-                <Route path="bookings" element={<Bookings />} />
-                <Route path="blog-posts" element={<BlogPosts />} />
-                <Route path="contact-messages" element={<ContactMessages />} />
-                <Route path="settings" element={<Settings />} />
-              </Route>
-            </Routes>
-          </AnimatePresence>
+            {/* Dashboard Routes */}
+            <Route path="/manager" element={<Dashboard />}>
+              <Route index element={<Overview />} />
+              <Route path="overview" element={<Overview />} />
+              <Route path="bookings" element={<Bookings />} />
+              <Route path="blog-posts" element={<BlogPosts />} />
+              <Route path="contact-messages" element={<ContactMessages />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+          </Routes>
+        </AnimatePresence>
 
-          <Footer />
+        <Footer />
 
-          {/* Booking Form Modal */}
-          <BookingForm
-            isOpen={isBookingFormOpen}
-            onClose={handleCloseBookingForm}
-            preSelectedRoom={selectedRoom}
-            language={language}
-          />
+        {/* Booking Form Modal */}
+        <BookingForm
+          isOpen={isBookingFormOpen}
+          onClose={handleCloseBookingForm}
+          preSelectedRoom={selectedRoom}
+          language={language}
+        />
 
-          {/* Event Booking Form Modal */}
-          <EventBookingForm
-            isOpen={isEventBookingFormOpen}
-            onClose={handleCloseEventBookingForm}
-            language={language}
-          />
-        </div>
-      </ScrollObserverWrapper>
-    </BrowserRouter>
+        {/* Event Booking Form Modal */}
+        <EventBookingForm
+          isOpen={isEventBookingFormOpen}
+          onClose={handleCloseEventBookingForm}
+          language={language}
+        />
+      </div>
+    </ScrollObserverWrapper>
   );
 }
 
