@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from 'tailwindcss/plugin';
+
 export default {
   content: [
     "./index.html",
@@ -7,7 +9,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Simple Blue/Neutral Theme
+        // Dark Luxury Theme from UPGRADEfile.md
+        'navy-deepest': '#0f172a',
+        'midnight-blue': '#1e3a8a',
+        'slate-black': '#0a1628',
+        'royal-blue': '#2563eb',
+        'sky-blue': '#3b82f6',
+        'azure-glow': '#60a5fa',
+        'gold-premium': '#d4af37',
+        'gold-warm': '#f4d03f',
+        'soft-white': 'rgba(255, 255, 255, 0.9)',
+
+        // Retaining old theme for compatibility during transition
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
@@ -43,6 +56,7 @@ export default {
       },
       backdropBlur: {
         xs: '2px',
+        xl: '20px', // From Glass Morphism System
       },
       animation: {
         'float': 'float 3s ease-in-out infinite',
@@ -65,5 +79,20 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ theme, addUtilities }) {
+      const newUtilities = {
+        '.text-shadow': {
+          textShadow: '0 2px 12px rgba(0, 0, 0, 0.4)',
+        },
+        '.text-shadow-sm': {
+          textShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+        },
+        '.text-shadow-lg': {
+          textShadow: '0 4px 16px rgba(0, 0, 0, 0.6)',
+        },
+      }
+      addUtilities(newUtilities)
+    })
+  ],
 }

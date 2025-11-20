@@ -35,14 +35,36 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-gray-50">
+    <section
+      id="contact"
+      style={{
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)',
+        padding: '6rem 0',
+      }}
+    >
       <div className="container-custom">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-16">
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              fontWeight: 600,
+              color: '#ffffff',
+              textShadow: '0 2px 12px rgba(0, 0, 0, 0.4)',
+              marginBottom: '1rem',
+            }}
+          >
             Get In Touch
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p
+            style={{
+              fontSize: '1.125rem',
+              color: 'rgba(255, 255, 255, 0.85)',
+              maxWidth: '800px',
+              margin: '0 auto',
+            }}
+          >
             Have questions or ready to book? Contact us today and our friendly team will be happy to assist you.
           </p>
         </div>
@@ -52,68 +74,193 @@ const Contact = () => {
           <div>
             <div className="space-y-6 mb-8">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
-                      <info.icon size={24} className="text-white" />
+                <div
+                  key={index}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '16px',
+                    padding: '1.5rem',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.border = '1px solid rgba(37, 99, 235, 0.3)';
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div
+                      style={{
+                        width: '48px',
+                        height: '48px',
+                        background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
+                        borderRadius: '12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <info.icon size={24} style={{ color: '#ffffff' }} />
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-lg">
-                      {info.title}
-                    </h3>
-                    {info.details.map((detail, idx) => (
-                      <p key={idx} className="text-gray-600">
-                        {info.action ? (
-                          <a
-                            href={info.action}
-                            className="hover:text-primary-600 transition-colors"
-                          >
-                            {detail}
-                          </a>
-                        ) : (
-                          detail
-                        )}
-                      </p>
-                    ))}
+                    <div>
+                      <h3
+                        style={{
+                          fontWeight: 600,
+                          color: '#ffffff',
+                          marginBottom: '0.5rem',
+                          fontSize: '1.125rem',
+                        }}
+                      >
+                        {info.title}
+                      </h3>
+                      {info.details.map((detail, idx) => (
+                        <p
+                          key={idx}
+                          style={{
+                            color: 'rgba(255, 255, 255, 0.85)',
+                            fontSize: '0.95rem',
+                          }}
+                        >
+                          {info.action ? (
+                            <a
+                              href={info.action}
+                              style={{
+                                color: 'rgba(255, 255, 255, 0.85)',
+                                textDecoration: 'none',
+                                transition: 'color 0.3s ease',
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color = '#3b82f6';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)';
+                              }}
+                            >
+                              {detail}
+                            </a>
+                          ) : (
+                            detail
+                          )}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* WhatsApp Quick Contact */}
-            <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-6 text-white shadow-lg">
+            <div
+              style={{
+                background: 'linear-gradient(135deg, #10b981, #059669)',
+                borderRadius: '16px',
+                padding: '1.5rem',
+                color: '#ffffff',
+                boxShadow: '0 8px 24px rgba(16, 185, 129, 0.3)',
+                marginBottom: '2rem',
+              }}
+            >
               <div className="flex items-center space-x-3 mb-3">
                 <MessageCircle size={28} />
-                <h3 className="text-xl font-bold">Quick Contact via WhatsApp</h3>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+                  Quick Contact via WhatsApp
+                </h3>
               </div>
-              <p className="mb-4 text-white/90">
+              <p style={{ marginBottom: '1rem', opacity: 0.95 }}>
                 Get instant responses to your questions. Chat with us on WhatsApp now!
               </p>
               <button
                 onClick={handleWhatsAppClick}
-                className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors w-full sm:w-auto"
+                style={{
+                  background: '#ffffff',
+                  color: '#059669',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '12px',
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  width: '100%',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f0fdf4';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#ffffff';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
               >
                 Start WhatsApp Chat
               </button>
             </div>
 
             {/* Rating */}
-            <div className="mt-8 bg-white rounded-lg p-6 shadow-md">
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '16px',
+                padding: '1.5rem',
+              }}
+            >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Google Rating</p>
+                  <p
+                    style={{
+                      fontSize: '0.875rem',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      marginBottom: '0.25rem',
+                    }}
+                  >
+                    Google Rating
+                  </p>
                   <div className="flex items-center space-x-2">
-                    <span className="text-3xl font-bold text-gray-900">4.0</span>
-                    <span className="text-yellow-400 text-2xl">⭐⭐⭐⭐</span>
+                    <span
+                      style={{
+                        fontSize: '2rem',
+                        fontWeight: 'bold',
+                        color: '#ffffff',
+                      }}
+                    >
+                      4.0
+                    </span>
+                    <span style={{ fontSize: '1.5rem' }}>⭐⭐⭐⭐</span>
                   </div>
-                  <p className="text-sm text-gray-600 mt-1">Based on 400+ reviews</p>
+                  <p
+                    style={{
+                      fontSize: '0.875rem',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      marginTop: '0.25rem',
+                    }}
+                  >
+                    Based on 400+ reviews
+                  </p>
                 </div>
                 <a
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary-600 hover:text-primary-700 font-semibold text-sm"
+                  style={{
+                    color: '#3b82f6',
+                    fontWeight: 600,
+                    fontSize: '0.875rem',
+                    textDecoration: 'none',
+                    transition: 'color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#60a5fa';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#3b82f6';
+                  }}
                 >
                   View on Google Maps →
                 </a>
@@ -123,7 +270,18 @@ const Contact = () => {
 
           {/* Map Section */}
           <div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full min-h-[500px]">
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(37, 99, 235, 0.2)',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                height: '100%',
+                minHeight: '500px',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+              }}
+            >
               {/* TODO: Replace with actual Google Maps embed for Eighth St, Nairobi, Eastleigh */}
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8176449742574!2d36.8373!3d-1.2833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTYnNTkuOSJTIDM2wrA1MCcxNC4zIkU!5e0!3m2!1sen!2ske!4v1234567890"
@@ -136,7 +294,14 @@ const Contact = () => {
                 title="Bin Ali Hotel Location"
               />
             </div>
-            <p className="text-sm text-gray-600 mt-4 text-center">
+            <p
+              style={{
+                fontSize: '0.875rem',
+                color: 'rgba(255, 255, 255, 0.7)',
+                marginTop: '1rem',
+                textAlign: 'center',
+              }}
+            >
               Located in the heart of Eastleigh, easily accessible from all major routes
             </p>
           </div>

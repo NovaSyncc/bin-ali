@@ -1,11 +1,8 @@
-const GlassCard = ({ children, className = '', hover = true, onClick }) => {
+const GlassCard = ({ children, className = '', onClick }) => {
   return (
     <div
       className={`
-        glass-effect
-        rounded-3xl
-        p-6
-        ${hover ? 'glass-card-hover' : 'glass-card'}
+        premium-glass-card
         ${className}
       `}
       onClick={onClick}

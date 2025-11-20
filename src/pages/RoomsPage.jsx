@@ -1,200 +1,117 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Wifi, Wind, Droplet, Tv, Refrigerator, BellRing, Laptop, Bed, Armchair, Users, ArrowRight, Images, ChefHat } from 'lucide-react';
+import { Wifi, Wind, Droplets, Tv, Refrigerator, BellRing, Users, Images, Sparkles } from 'lucide-react';
 import PageTransition from '../components/shared/PageTransition';
 import Lightbox from '../components/shared/Lightbox';
+import RoomsHero from '../components/RoomsHero';
 import { rooms } from '../data/rooms';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import { getTranslation } from '../utils/translations';
 
-const RoomsPage = ({ onBookNow }) => {
+const RoomsPage = ({ onBookNow, language = 'en' }) => {
+  const t = (key) => getTranslation(language, key);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Icon mapping for amenities
   const getAmenityIcon = (amenity) => {
     const icons = {
       'WiFi': Wifi,
       'AC': Wind,
-      'Hot Water': Droplet,
+      'Hot Water': Droplets,
       'TV': Tv,
       'Mini Fridge': Refrigerator,
       'Room Service': BellRing,
-      'Work Desk': Laptop,
-      'Kitchenette': ChefHat,
-      'Seating Area': Armchair
     };
-    const IconComponent = icons[amenity] || BellRing;
-    return <IconComponent size={18} className="text-primary-600" />;
+    const IconComponent = icons[amenity] || Sparkles;
+    return <IconComponent size={16} className="text-sky-blue" />;
   };
 
-  // Open lightbox with room images
   const openRoomGallery = (room) => {
     setLightboxImages(room.images || [room.image]);
     setCurrentImageIndex(0);
     setLightboxOpen(true);
   };
 
-  // Lightbox navigation handlers
-  const handleNext = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % lightboxImages.length);
-  };
-
-  const handlePrevious = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
-  };
-
-  const handleClose = () => {
-    setLightboxOpen(false);
-  };
+  const handleNext = () => setCurrentImageIndex((prev) => (prev + 1) % lightboxImages.length);
+  const handlePrevious = () => setCurrentImageIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
+  const handleClose = () => setLightboxOpen(false);
 
   return (
     <PageTransition>
-      {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Parallax Effect */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: `url(${receptionImage})`
-          }}
-        />
+      <RoomsHero onBookNow={onBookNow} language={language} />
 
-        {/* Hero Overlay */}
-        <div className="absolute inset-0 hero-overlay" />
-
-        {/* Hero Content */}
-        <div className="relative z-10 text-center text-white px-4 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-up">
-            Our Rooms
-          </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto" style={{ animationDelay: '0.2s' }}>
-            Simple, comfortable rooms for your stay
-          </p>
-        </div>
-      </section>
-
-      {/* Rooms Section */}
-      <section className="section-padding bg-cream-100">
+      <section id="room-list" className="bg-navy-deepest py-24">
         <div className="container-custom">
-          {/* Section Header */}
-          <div className="text-center mb-16 scroll-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-800 mb-4">
-              Room Options
-            </h2>
-            <p className="text-base text-gray-600 max-w-2xl mx-auto">
-              Choose from our selection of clean, comfortable rooms at affordable prices.
-            </p>
-          </div>
-
-          {/* Rooms Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-16">
-            {rooms.map((room, index) => (
-              <div
-                key={room.id}
-                className="room-card scroll-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Room Image */}
-                <div className="image-container relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {rooms.map((room) => (
+              <div key={room.id} className="premium-glass-card flex flex-col overflow-hidden">
+                {/* Image Top */}
+                <div className="relative group">
                   <img
                     src={room.image}
                     alt={room.type}
-                    className="w-full h-full object-cover"
+                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="overlay-gradient" />
-
-                  {/* Price Badge */}
-                  <div className="price-badge">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-black/60 to-transparent"></div>
+                  <div className="absolute top-4 right-4 bg-gold-premium/95 text-navy-deepest px-4 py-2 rounded-full font-bold text-sm backdrop-blur-sm">
                     KES {room.price.toLocaleString()}/night
                   </div>
-
-                  {/* Capacity Badge */}
-                  <div className="absolute bottom-4 left-4 glass-effect px-3 py-1.5 rounded-full flex items-center space-x-1 text-white">
-                    <Users size={16} />
-                    <span className="text-sm font-semibold">{room.capacity} Guest{room.capacity > 1 ? 's' : ''}</span>
-                  </div>
-
-                  {/* View More Images Button */}
                   <button
                     onClick={() => openRoomGallery(room)}
-                    className="absolute bottom-4 right-4 glass-effect px-4 py-2 rounded-full flex items-center space-x-2 text-white hover:bg-primary-600 transition-all duration-300 group"
+                    className="absolute bottom-4 right-4 flex items-center gap-2 text-white bg-white/10 backdrop-blur-xl border border-white/20 px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-white/20 transition-colors"
                   >
-                    <Images size={18} className="group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-semibold">{room.images?.length || 1} Photos</span>
+                    <Images size={14} />
+                    <span>{room.images?.length || 1} {language === 'so' ? 'Sawir' : 'Photos'}</span>
                   </button>
                 </div>
 
-                {/* Room Details */}
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-primary-800 mb-3">
-                    {room.type}
-                  </h3>
-                  <p className="text-gray-600 mb-6">
+                {/* Content Below */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold mb-2">{room.type}</h3>
+                  <div className="flex items-center gap-2 text-soft-white/80 mb-3 text-sm">
+                    <Users size={16} />
+                    <span>{language === 'so' ? 'Ilaa' : 'Up to'} {room.capacity} {room.capacity > 1 ? t('rooms.guests') : (language === 'so' ? 'marti' : 'guest')}</span>
+                  </div>
+                  <p className="text-soft-white/80 text-sm mb-4 flex-grow leading-relaxed">
                     {room.description}
                   </p>
 
-                  {/* Amenities */}
-                  <div className="mb-6">
-                    <p className="text-sm font-semibold text-gray-700 mb-3">Amenities:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {room.amenities.map((amenity) => (
-                        <div
-                          key={amenity}
-                          className="flex items-center space-x-1.5 glass-effect px-3 py-2 rounded-full hover:border-primary-400 transition-all duration-300"
-                          title={amenity}
-                        >
-                          {getAmenityIcon(amenity)}
-                          <span className="text-xs font-medium text-gray-700">{amenity}</span>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-x-3 gap-y-2 mb-6">
+                    {room.amenities.slice(0, 4).map((amenity) => (
+                      <div key={amenity} className="flex items-center gap-1.5" title={amenity}>
+                        {getAmenityIcon(amenity)}
+                        <span className="text-xs text-soft-white">{amenity}</span>
+                      </div>
+                    ))}
+                    {room.amenities.length > 4 && (
+                      <span className="text-xs text-gold-premium">+{room.amenities.length - 4} {language === 'so' ? 'dheeraad ah' : 'more'}</span>
+                    )}
                   </div>
 
-                  {/* Book Button */}
                   <button
                     onClick={() => onBookNow && onBookNow(room)}
-                    className="cta-gold w-full"
+                    className="btn-blue w-full"
                   >
-                    Book This Room
+                    {language === 'so' ? 'Buugi Qolkan' : 'Book This Room'}
                   </button>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Gallery CTA */}
-          <div className="text-center">
+          <div className="text-center mt-16">
             <Link to="/gallery">
-              <button className="cta-outline inline-flex items-center gap-2">
-                View Full Gallery
-                <ArrowRight size={20} />
+              <button className="btn-glass px-8 py-3 text-base">
+                {language === 'so' ? 'Eeg Sawirka Oo Dhan' : 'View Full Gallery'}
               </button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Mobile Sticky Book Now Button */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-lg md:hidden z-40">
-        <button
-          onClick={() => onBookNow && onBookNow()}
-          className="cta-gold w-full"
-        >
-          Book Your Stay Now
-        </button>
-      </div>
-
-      {/* Lightbox for Room Images */}
       {lightboxOpen && (
-        <Lightbox
-          images={lightboxImages}
-          currentIndex={currentImageIndex}
-          onClose={handleClose}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-        />
+        <Lightbox images={lightboxImages} currentIndex={currentImageIndex} onClose={handleClose} onNext={handleNext} onPrevious={handlePrevious} />
       )}
     </PageTransition>
   );

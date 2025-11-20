@@ -1,100 +1,143 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import clsx from 'clsx';
 import logo from '../assets/images/logo.png';
+import { getTranslation } from '../utils/translations';
 
-const Navbar = ({ onBookNow }) => {
+const Navbar = ({ onBookNow, language = 'en', onLanguageChange }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Handle scroll effect for navbar background
+  const t = (key) => getTranslation(language, key);
+
+  // Debug: Log language changes
+  console.log('Navbar language:', language);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const menuItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Rooms', path: '/rooms' },
-    { label: 'About', path: '/about' },
-    { label: 'Events', path: '/events' },
-    { label: 'Gallery', path: '/gallery' },
-    { label: 'Contact', path: '/contact' },
+    { label: t('nav.home'), path: '/' },
+    { label: t('nav.rooms'), path: '/rooms' },
+    { label: t('nav.blog'), path: '/blog' },
+    { label: t('nav.about'), path: '/about' },
+    { label: t('nav.events'), path: '/events' },
+    { label: t('nav.gallery'), path: '/gallery' },
+    { label: t('nav.contact'), path: '/contact' },
   ];
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-effect bg-white/95 shadow-lg' : 'glass-effect bg-white/10'
-      }`}
+      className={clsx(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out',
+        'bg-navy-deepest/95 backdrop-blur-xl border-b border-royal-blue/20'
+      )}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-20 px-4">
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center justify-between h-20 px-4">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-3">
-              <img
-                src={logo}
-                alt="Bin Ali Hotel Logo"
-                className="h-12 w-auto object-contain"
-              />
-              <span className={`text-xl font-bold transition-colors hidden sm:block ${
-                isScrolled ? 'text-primary-green' : 'text-white'
-              }`}>
-                Bin Ali Hotel
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src={logo}
+              alt="Bin Ali Hotel Logo"
+              className="h-12 w-auto object-contain p-1 border-2 border-gold-premium rounded-lg"
+            />
+            <div className="flex flex-col">
+              <span className="font-playfair text-xl font-bold text-white leading-tight">
+                BIN ALI
               </span>
-            </Link>
-          </div>
+              <span className="text-xs text-gold-premium tracking-widest font-semibold">
+                HOTEL
+              </span>
+            </div>
+          </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-8">
+          {/* Desktop Menu - Center */}
+          <div className="flex items-center space-x-2">
             {menuItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-medium transition-all duration-300 hover:text-accent-gold relative ${
-                  isActive(item.path)
-                    ? isScrolled
-                      ? 'text-accent-gold font-semibold'
-                      : 'text-accent-gold font-semibold'
-                    : isScrolled
-                    ? 'text-gray-700'
-                    : 'text-white'
-                }`}
+                className={clsx(
+                  'relative px-4 py-2 rounded-lg transition-colors duration-300 text-soft-white hover:text-sky-blue hover:bg-royal-blue/10',
+                  { 'text-sky-blue font-semibold': isActive(item.path) }
+                )}
               >
                 {item.label}
                 {isActive(item.path) && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-gold rounded-full" />
+                  <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-royal-blue rounded-full" />
                 )}
               </Link>
             ))}
-            <button
-              onClick={() => onBookNow && onBookNow()}
-              className="cta-gold"
-            >
-              Book Now
-            </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Desktop Right Side - Language + Book Now */}
+          <div className="flex items-center gap-4">
+            {/* Language Toggle Desktop */}
+            <div className="flex items-center">
+              <button
+                onClick={() => onLanguageChange('en')}
+                className={clsx(
+                  'px-3 py-1 rounded-l-md border border-royal-blue/30 text-sm font-semibold transition-all',
+                  language === 'en' ? 'bg-gold-premium text-navy-deepest' : 'bg-royal-blue/10 text-soft-white hover:bg-royal-blue/20'
+                )}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => onLanguageChange('so')}
+                className={clsx(
+                  'px-3 py-1 rounded-r-md border border-royal-blue/30 text-sm font-semibold transition-all',
+                  language === 'so' ? 'bg-gold-premium text-navy-deepest' : 'bg-royal-blue/10 text-soft-white hover:bg-royal-blue/20'
+                )}
+              >
+                SO
+              </button>
+            </div>
+            <button
+              onClick={() => onBookNow && onBookNow()}
+              className="btn-gold py-3 px-6 text-sm"
+            >
+              {t('nav.bookNow')}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="lg:hidden flex items-center justify-between h-20 px-4">
+          {/* Mobile Logo - Left */}
+          <Link to="/" className="flex items-center">
+            <img
+              src={logo}
+              alt="Bin Ali Hotel Logo"
+              className="h-10 w-auto object-contain p-1 border-2 border-gold-premium rounded-lg"
+            />
+          </Link>
+
+          {/* Mobile Brand Name - Center */}
+          <Link to="/" className="flex flex-col items-center">
+            <span className="font-playfair text-base font-bold text-white leading-tight">
+              BIN ALI
+            </span>
+            <span className="text-[10px] text-gold-premium tracking-wider font-semibold">
+              HOTEL
+            </span>
+          </Link>
+
+          {/* Mobile Menu Button - Right */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 transition-colors ${
-              isScrolled ? 'text-gray-700' : 'text-white'
-            }`}
+            className="p-2 text-soft-white"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -103,30 +146,53 @@ const Navbar = ({ onBookNow }) => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden glass-effect bg-white/95 shadow-lg rounded-b-3xl">
-            <div className="px-4 py-4 space-y-3">
+          <div className="lg:hidden bg-navy-deepest/95 backdrop-blur-xl border-t border-royal-blue/20 shadow-lg">
+            <div className="px-4 pt-2 pb-4 space-y-2">
               {menuItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block w-full text-left py-3 px-4 rounded-xl font-medium transition-all duration-300 ${
-                    isActive(item.path)
-                      ? 'bg-accent-gold text-primary-dark-green font-semibold'
-                      : 'text-gray-700 hover:bg-primary-green/10'
-                  }`}
+                  className={clsx(
+                    'block w-full text-left px-4 py-3 rounded-lg text-lg transition-colors duration-300 min-h-[44px]',
+                    {
+                      'bg-royal-blue/20 text-sky-blue font-semibold': isActive(item.path),
+                      'text-soft-white hover:bg-royal-blue/10 hover:text-sky-blue': !isActive(item.path),
+                    }
+                  )}
                 >
                   {item.label}
                 </Link>
               ))}
+              {/* Language Toggle Mobile */}
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={() => { onLanguageChange('en'); setIsMobileMenuOpen(false); }}
+                  className={clsx(
+                    'px-4 py-2 rounded-l-md border border-royal-blue/30 text-base font-semibold',
+                    language === 'en' ? 'bg-gold-premium text-navy-deepest' : 'bg-royal-blue/10 text-soft-white hover:bg-royal-blue/20'
+                  )}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => { onLanguageChange('so'); setIsMobileMenuOpen(false); }}
+                  className={clsx(
+                    'px-4 py-2 rounded-r-md border border-royal-blue/30 text-base font-semibold',
+                    language === 'so' ? 'bg-gold-premium text-navy-deepest' : 'bg-royal-blue/10 text-soft-white hover:bg-royal-blue/20'
+                  )}
+                >
+                  SO
+                </button>
+              </div>
               <button
                 onClick={() => {
                   onBookNow && onBookNow();
                   setIsMobileMenuOpen(false);
                 }}
-                className="cta-gold w-full"
+                className="btn-gold w-full mt-2 py-3"
               >
-                Book Now
+                {t('nav.bookNow')}
               </button>
             </div>
           </div>
