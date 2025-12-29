@@ -203,20 +203,28 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
           {/* Room Type */}
           <div>
             <label htmlFor="roomType" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.roomType')} *</label>
-            <select
-              id="roomType"
-              name="roomType"
-              value={formData.roomType}
-              onChange={handleChange}
-              className={`${inputBaseClasses} px-4 py-3 appearance-none ${errors.roomType ? 'border-red-500' : ''}`}
-            >
-              <option value="">{t('booking.selectRoom')}</option>
-              {rooms.map((room) => (
-                <option key={room.id} value={room.type} className="bg-navy-deepest text-soft-white">
-                  {room.type} - KES {room.price.toLocaleString()}/{language === 'so' ? 'habeen' : 'night'}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="roomType"
+                name="roomType"
+                value={formData.roomType}
+                onChange={handleChange}
+                className={`${inputBaseClasses} px-4 py-3 pr-10 cursor-pointer ${errors.roomType ? 'border-red-500' : ''}`}
+                style={{ backgroundImage: 'none' }}
+              >
+                <option value="">{t('booking.selectRoom')}</option>
+                {rooms.map((room) => (
+                  <option key={room.id} value={room.type} className="bg-navy-deepest text-soft-white">
+                    {room.type} - KES {room.price.toLocaleString()}/{language === 'so' ? 'habeen' : 'night'}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-5 h-5 text-soft-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
             {errors.roomType && <p className="text-red-500 text-sm mt-1">{errors.roomType}</p>}
           </div>
 
