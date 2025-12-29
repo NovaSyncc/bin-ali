@@ -16,6 +16,8 @@ export const formatWhatsAppMessage = (bookingData) => {
     fullName,
     phoneNumber,
     checkInDate,
+    checkOutDate,
+    numberOfDays,
     roomType,
     numberOfGuests,
     specialRequests
@@ -39,6 +41,8 @@ I would like to make a booking:
 *Name:* ${fullName}
 *Phone:* ${phoneNumber}
 *Check-in Date:* ${formatDate(checkInDate)}
+*Check-out Date:* ${formatDate(checkOutDate)}
+*Number of Days:* ${numberOfDays}
 *Room Type:* ${roomType}
 *Number of Guests:* ${numberOfGuests}${specialRequests ? `\n*Special Requests:* ${specialRequests}` : ''}
 
@@ -91,10 +95,12 @@ export const validateBookingData = (bookingData) => {
     errors.fullName = 'Please enter your full name';
   }
 
-  // Validate phone number (Kenya format)
-  const phoneRegex = /^(\+254|0)[17]\d{8}$/;
-  if (!bookingData.phoneNumber || !phoneRegex.test(bookingData.phoneNumber.replace(/\s/g, ''))) {
-    errors.phoneNumber = 'Please enter a valid Kenya phone number';
+  // Validate phone number (International format with + prefix)
+  const phoneRegex = /^\+[1-9]\d{1,14}$/;
+  if (!bookingData.phoneNumber) {
+    errors.phoneNumber = 'Please enter a valid phone number';
+  } else if (!phoneRegex.test(bookingData.phoneNumber.replace(/\s/g, ''))) {
+    errors.phoneNumber = 'Please enter a valid international phone number (e.g., +254712345678)';
   }
 
   // Validate check-in date
@@ -110,6 +116,13 @@ export const validateBookingData = (bookingData) => {
     errors.checkInDate = 'Check-in date cannot be in the past';
   } else if (checkIn > maxDate) {
     errors.checkInDate = 'Check-in date cannot be more than 46 days in advance';
+  }
+
+  // Validate number of days
+  if (!bookingData.numberOfDays || bookingData.numberOfDays < 1) {
+    errors.numberOfDays = 'Please enter number of days (minimum 1)';
+  } else if (bookingData.numberOfDays > 46) {
+    errors.numberOfDays = 'Maximum stay is 46 days';
   }
 
   // Validate room type

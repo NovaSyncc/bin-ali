@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, Calendar, Users, Phone, User, MessageSquare } from 'lucide-react';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import { handleWhatsAppBooking, validateBookingData } from '../services/bookingService';
 import { rooms } from '../data/rooms';
 import { getTranslation } from '../utils/translations';
@@ -15,6 +17,8 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
     fullName: '',
     phoneNumber: '',
     checkInDate: today,
+    numberOfDays: 1,
+    checkOutDate: new Date(new Date(today).getTime() + 86400000).toISOString().split('T')[0],
     roomType: '',
     numberOfGuests: 1,
     specialRequests: ''
@@ -25,6 +29,16 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
       setFormData(prev => ({ ...prev, roomType: preSelectedRoom.type }));
     }
   }, [preSelectedRoom]);
+
+  // Calculate checkout date when check-in date or number of days changes
+  useEffect(() => {
+    if (formData.checkInDate && formData.numberOfDays) {
+      const checkIn = new Date(formData.checkInDate);
+      const checkOut = new Date(checkIn.getTime() + (formData.numberOfDays * 86400000));
+      const checkOutString = checkOut.toISOString().split('T')[0];
+      setFormData(prev => ({ ...prev, checkOutDate: checkOutString }));
+    }
+  }, [formData.checkInDate, formData.numberOfDays]);
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -60,6 +74,8 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
       fullName: '',
       phoneNumber: '',
       checkInDate: today,
+      numberOfDays: 1,
+      checkOutDate: new Date(new Date(today).getTime() + 86400000).toISOString().split('T')[0],
       roomType: preSelectedRoom?.type || '',
       numberOfGuests: 1,
       specialRequests: ''
@@ -110,18 +126,19 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
           {/* Phone Number */}
           <div>
             <label htmlFor="phoneNumber" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.phone')} *</label>
-            <div className="relative">
-              <Phone size={20} className={inputIconClasses} />
-              <input
-                type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                className={`${inputBaseClasses} pl-10 pr-4 py-3 ${errors.phoneNumber ? 'border-red-500' : ''}`}
-                placeholder={t('booking.enterPhone')}
-              />
-            </div>
+            <PhoneInput
+              international
+              defaultCountry="KE"
+              value={formData.phoneNumber}
+              onChange={(value) => {
+                setFormData(prev => ({ ...prev, phoneNumber: value || '' }));
+                if (errors.phoneNumber) {
+                  setErrors(prev => ({ ...prev, phoneNumber: '' }));
+                }
+              }}
+              className={`phone-input-custom ${errors.phoneNumber ? 'phone-input-error' : ''}`}
+              placeholder={t('booking.enterPhone')}
+            />
             {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>}
           </div>
 
@@ -143,6 +160,44 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
             </div>
             {errors.checkInDate && <p className="text-red-500 text-sm mt-1">{errors.checkInDate}</p>}
             <p className="text-xs text-soft-white/60 mt-1">{language === 'so' ? 'Waxaad buugin kartaa ilaa 46 maalmood hore' : 'You can book up to 46 days in advance.'}</p>
+          </div>
+
+          {/* Number of Days */}
+          <div>
+            <label htmlFor="numberOfDays" className="block text-sm font-semibold text-soft-white/80 mb-2">{language === 'so' ? 'Tirada Maalmaha' : 'Number of Days'} *</label>
+            <div className="relative">
+              <Calendar size={20} className={inputIconClasses} />
+              <input
+                type="number"
+                id="numberOfDays"
+                name="numberOfDays"
+                value={formData.numberOfDays}
+                onChange={handleChange}
+                min="1"
+                max="46"
+                className={`${inputBaseClasses} pl-10 pr-4 py-3 ${errors.numberOfDays ? 'border-red-500' : ''}`}
+              />
+            </div>
+            {errors.numberOfDays && <p className="text-red-500 text-sm mt-1">{errors.numberOfDays}</p>}
+            <p className="text-xs text-soft-white/60 mt-1">{language === 'so' ? 'Dooro inta maalmood aad joogi doonto' : 'Select how many days you will stay'}</p>
+          </div>
+
+          {/* Check-out Date (Auto-calculated) */}
+          <div>
+            <label htmlFor="checkOutDate" className="block text-sm font-semibold text-soft-white/80 mb-2">{language === 'so' ? 'Taariikhda Bixitaanka' : 'Check-out Date'}</label>
+            <div className="relative">
+              <Calendar size={20} className={inputIconClasses} />
+              <input
+                type="date"
+                id="checkOutDate"
+                name="checkOutDate"
+                value={formData.checkOutDate}
+                readOnly
+                disabled
+                className={`${inputBaseClasses} pl-10 pr-4 py-3 cursor-not-allowed opacity-75`}
+              />
+            </div>
+            <p className="text-xs text-soft-white/60 mt-1">{language === 'so' ? 'Waxaa si toos ah loo xisaabiyo maalinta bixitaanka' : 'Automatically calculated based on check-in and number of days'}</p>
           </div>
 
           {/* Room Type */}

@@ -594,4 +594,43 @@
   .premium-glass-card:hover::before {
     opacity: 1;
   }
+
+  /* Custom Phone Input Styling */
+  .phone-input-custom .PhoneInputInput {
+    @apply w-full bg-navy-deepest/50 border-0 rounded-lg text-soft-white py-3 pr-4 transition-all duration-300;
+    padding-left: 2.5rem;
+    outline: none;
+  }
+
+  .phone-input-custom .PhoneInputInput:focus {
+    @apply ring-2 ring-gold-premium;
+  }
+
+  .phone-input-custom {
+    @apply relative bg-navy-deepest/50 border border-royal-blue/30 rounded-lg transition-all duration-300;
+  }
+
+  .phone-input-custom:focus-within {
+    @apply ring-2 ring-gold-premium;
+  }
+
+  .phone-input-custom.phone-input-error {
+    @apply border-red-500;
+  }
+
+  .phone-input-custom .PhoneInputCountry {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 z-10;
+  }
+
+  .phone-input-custom .PhoneInputCountryIcon {
+    @apply w-6 h-6 shadow-sm;
+  }
+
+  .phone-input-custom .PhoneInputCountrySelect {
+    @apply bg-transparent border-0 text-soft-white cursor-pointer;
+  }
+
+  .phone-input-custom .PhoneInputCountrySelectArrow {
+    @apply text-soft-white/50 ml-1;
+  }
 }

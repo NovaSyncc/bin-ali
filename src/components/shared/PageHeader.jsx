@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import defaultBg from '../../assets/images/cover/herobackground.webp';
+import receptionImage from '../../assets/images/cover/reception.jpg';
 
 const PageHeader = ({ title, subtitle, backgroundImage }) => {
-  const bgImage = backgroundImage || defaultBg;
+  const bgImage = backgroundImage || receptionImage;
 
   return (
     <div

@@ -4,8 +4,7 @@ import clsx from 'clsx';
 import PageTransition from './shared/PageTransition';
 
 // Wedding Hall Video Assets
-import hallImage1 from '../assets/images/cover/reception.jpg';
-import hallImage2 from '../assets/images/cover/herobackground.webp';
+import receptionImage from '../assets/images/cover/reception.jpg';
 
 const weddingHallsData = [
   {
@@ -26,7 +25,7 @@ const weddingHallsData = [
     media: {
       type: "video",
       src: "https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/firsthall_lanscape.mp4",
-      poster: hallImage1, // Fallback image for video
+      poster: receptionImage, // Fallback image for video
       orientation: "landscape"
     }
   },
@@ -48,7 +47,7 @@ const weddingHallsData = [
     media: {
       type: "video",
       src: "https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/SecondHallPortrait.MP4",
-      poster: hallImage2,
+      poster: receptionImage,
       alt: "Elegant Boutique Hall",
       orientation: "portrait",
       startTime: 3 // Start playback from 3 seconds
