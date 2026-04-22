@@ -69,8 +69,8 @@ The site will be available at `http://localhost:5173`
 Create a `.env` file in the root directory with the following variables:
 
 ```
-VITE_WHATSAPP_NUMBER=254745386007
-VITE_HOTEL_PHONE=0745386007
+VITE_WHATSAPP_NUMBER=254791110089
+VITE_HOTEL_PHONE=0791110089
 VITE_HOTEL_EMAIL=info@binalihotel.com
 VITE_HOTEL_ADDRESS=Eighth St, Nairobi
 ```

@@ -58,7 +58,7 @@ function ReceiptDoc({ booking, logoDataUrl }) {
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 800, fontSize: 16, color: '#1a237e', letterSpacing: 0.5 }}>BIN ALI HOTEL</div>
           <div style={{ fontSize: 10, color: '#555', marginTop: 2 }}>Benghadzi, Somalia</div>
-          <div style={{ fontSize: 10, color: '#555' }}>Tel: +252 745 386 007</div>
+          <div style={{ fontSize: 10, color: '#555' }}>Tel: +252 791 110 089</div>
         </div>
         <div style={{ textAlign: 'right', flexShrink: 0 }}>
           <div style={{ background: '#1a237e', color: '#fff', fontWeight: 800, fontSize: 13, letterSpacing: 2, padding: '5px 14px', borderRadius: 6, display: 'inline-block' }}>
@@ -319,14 +319,14 @@ const Bookings = () => {
       pdf.save(fileName);
       const phone = toWhatsApp(receiptBooking.phone);
       const text  = encodeURIComponent(
-        `السلام عليكم ${receiptBooking.customer_name},\n\n` +
+        `Dear ${receiptBooking.customer_name},\n\n` +
         `*BIN ALI HOTEL* — Booking Confirmation\n` +
         `Ref: *${receiptBooking.booking_ref || '—'}*\n` +
         `Room: *${receiptBooking.room_number || '—'}* (${receiptBooking.rooms})\n` +
         `Check-in: *${fmtDate(receiptBooking.check_in_date)}*\n` +
         `Check-out: *${fmtDate(receiptBooking.check_out_date)}*\n\n` +
         `Please find your booking confirmation PDF attached.\n\n` +
-        `جزاك الله خيرا 🌟`
+        `Thank you 🌟`
       );
       const waUrl = phone
         ? `https://wa.me/${phone}?text=${text}`

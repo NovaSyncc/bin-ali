@@ -60,8 +60,8 @@ vercel --prod
 4. **Set Environment Variables**
    - Go to Vercel Dashboard > Your Project > Settings > Environment Variables
    - Add these variables:
-     - `VITE_WHATSAPP_NUMBER` = `254745386007`
-     - `VITE_HOTEL_PHONE` = `0745386007`
+     - `VITE_WHATSAPP_NUMBER` = `254791110089`
+     - `VITE_HOTEL_PHONE` = `0791110089`
      - `VITE_HOTEL_EMAIL` = `info@binalihotel.com`
      - `VITE_HOTEL_ADDRESS` = `Eighth St, Nairobi`
 
@@ -106,9 +106,9 @@ Test these features after deployment:
 3. Submit the form
 4. Should redirect to WhatsApp with pre-filled message
 5. Verify message format includes:
-   - Arabic greeting (السلام عليكم)
+   - Professional English greeting
    - All booking details
-   - Hotel contact number (+254745386007)
+   - Hotel contact number (+254791110089)
 
 ### ✅ Performance Check
 

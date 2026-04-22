@@ -33,8 +33,8 @@ export const formatWhatsAppMessage = (bookingData) => {
     });
   };
 
-  // Create the WhatsApp message with Arabic greeting and closing
-  const message = `السلام عليكم Bin Ali Hotel,
+  // Create the WhatsApp message with professional greeting and closing
+  const message = `Hello Bin Ali Hotel,
 
 I would like to make a booking:
 
@@ -48,7 +48,7 @@ I would like to make a booking:
 
 Please confirm availability and total price.
 
-جزاك الله خيرا`;
+Thank you`;
 
   return message;
 };
@@ -61,7 +61,7 @@ Please confirm availability and total price.
 export const handleWhatsAppBooking = (bookingData) => {
   try {
     // Get WhatsApp number from environment variable
-    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '254745386007';
+    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '254791110089';
 
     // Format the booking message
     const message = formatWhatsAppMessage(bookingData);

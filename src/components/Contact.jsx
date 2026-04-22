@@ -2,8 +2,8 @@ import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
   const handleWhatsAppClick = () => {
-    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '254745386007';
-    const message = encodeURIComponent('السلام عليكم, I would like to get more information about Bin Ali Hotel.');
+    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '254791110089';
+    const message = encodeURIComponent('Hello, I would like to get more information about Bin Ali Hotel.');
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
   };
 
@@ -17,8 +17,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone',
-      details: ['0745 386007', '+254 745 386007'],
-      action: 'tel:+254745386007'
+      details: ['0791110089', '+254 791 110 089'],
+      action: 'tel:+254791110089'
     },
     {
       icon: Mail,

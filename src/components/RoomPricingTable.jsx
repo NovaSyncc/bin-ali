@@ -10,8 +10,8 @@ const amenityIcons = {
   'Mini Fridge': <Refrigerator size={13} />,
 };
 
-const RECEPTION_PHONE = import.meta.env.VITE_HOTEL_PHONE || '0745386007';
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '254745386007';
+const RECEPTION_PHONE = import.meta.env.VITE_HOTEL_PHONE || '0791110089';
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '254791110089';
 
 const RoomPricingTable = ({ onBookNow }) => {
   const handleWhatsApp = (roomType) => {
