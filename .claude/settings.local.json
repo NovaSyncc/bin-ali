@@ -7,7 +7,9 @@
       "Bash(find C:\\\\Users\\\\hp\\\\Desktop\\\\Benghadzi\\\\Quraac\\\\QRC\\\\bin-ali\\\\src *)",
       "Bash(xargs grep *)",
       "Bash(find \"C:\\\\Users\\\\hp\\\\Desktop\\\\Benghadzi\\\\Quraac\\\\QRC\\\\bin-ali\\\\src\" -type f \\\\\\( -name \"*.js\" -o -name \"*.jsx\" \\\\\\) -exec grep -l \"form\\\\|submit\\\\|input\" {} \\\\;)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
