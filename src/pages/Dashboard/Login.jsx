@@ -16,19 +16,19 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-navy-deepest flex items-center justify-center p-4">
-      <div className="premium-glass-card p-8 w-full max-w-md">
+    <div className="min-h-screen bg-navy-deepest flex items-center justify-center p-4 relative z-50">
+      <div className="premium-glass-card p-8 w-full max-w-md relative z-10">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white">Reception Login</h2>
           <p className="text-gold-premium mt-2">Bin Ali Hotel Management</p>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 relative z-20">
           <div>
             <label className="block text-gray-300 text-sm font-bold mb-2">Username</label>
             <input
               type="text"
-              className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:border-gold-premium transition-colors"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white focus:outline-none focus:border-gold-premium transition-colors relative z-30"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter username"
@@ -40,7 +40,7 @@ const Login = ({ onLogin }) => {
             <label className="block text-gray-300 text-sm font-bold mb-2">Password</label>
             <input
               type="password"
-              className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:border-gold-premium transition-colors"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white focus:outline-none focus:border-gold-premium transition-colors relative z-30"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
