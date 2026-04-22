@@ -213,6 +213,26 @@ export const mediaService = {
 };
 
 export const bookingService = {
+  async createBooking(formData) {
+    if (!supabase) throw new Error('Supabase is not configured');
+    const { data, error } = await supabase
+      .from('bookings')
+      .insert([{
+        customer_name: formData.fullName,
+        phone: formData.phoneNumber,
+        check_in_date: formData.checkInDate,
+        check_out_date: formData.checkOutDate,
+        duration: Number(formData.numberOfDays),
+        rooms: formData.roomType,
+        guests: Number(formData.numberOfGuests),
+        special_requests: formData.specialRequests || null,
+        status: 'pending',
+      }])
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
   async getAllBookings() {
     const { data, error } = await supabase
       .from('bookings')

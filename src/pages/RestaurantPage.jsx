@@ -55,7 +55,7 @@ const RestaurantPage = () => {
   ];
 
   const handleReserveTable = () => {
-    const whatsappNumber = '254791110089';
+    const whatsappNumber = '252791110089';
     const message = encodeURIComponent('I would like to reserve a table at Bin Ali Hotel Restaurant');
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
   };

@@ -61,7 +61,7 @@ Thank you`;
 export const handleWhatsAppBooking = (bookingData) => {
   try {
     // Get WhatsApp number from environment variable
-    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '254791110089';
+    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '252791110089';
 
     // Format the booking message
     const message = formatWhatsAppMessage(bookingData);
