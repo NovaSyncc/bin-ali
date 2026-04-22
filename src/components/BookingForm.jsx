@@ -269,7 +269,6 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
           </p>
         </form>
       </div>
-      </div>
     </div>
   );
 };
