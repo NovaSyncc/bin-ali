@@ -57,11 +57,12 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
       return;
     }
     setIsSubmitting(true);
-    // Save to DB if Supabase is configured; silently skip if not
     try {
       await bookingService.createBooking(formData);
     } catch (err) {
-      console.warn('Booking DB save skipped:', err.message);
+      setErrors({ submit: 'Failed to save booking. Please try again or contact the hotel directly.' });
+      setIsSubmitting(false);
+      return;
     }
     const success = handleWhatsAppBooking(formData);
     if (success) {
