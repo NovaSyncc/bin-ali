@@ -21,23 +21,16 @@ const Bookings = () => {
     // No real-time subscription for bookings yet. Will add later if bookingService has it.
   }, []);
 
-  const fetchBookings = async () => {
+  const fetchBookings = async ({ search = searchTerm, start = startDate, end = endDate } = {}) => {
     setLoading(true);
     try {
       let fetchedBookings = [];
-      if (searchTerm) {
-        fetchedBookings = await bookingService.searchBookings(searchTerm);
-      } else if (startDate && endDate) {
-        fetchedBookings = await bookingService.filterBookingsByDate(startDate, endDate);
+      if (search) {
+        fetchedBookings = await bookingService.searchBookings(search);
+      } else if (start && end) {
+        fetchedBookings = await bookingService.filterBookingsByDate(start, end);
       } else {
-        // Assuming there's a getAllBookings in bookingService or similar
-        // For now, let's just get all bookings and sort by created_at
-        const { data, error } = await bookingService.supabase
-          .from('bookings')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (error) throw error;
-        fetchedBookings = data;
+        fetchedBookings = await bookingService.getAllBookings();
       }
       setBookings(fetchedBookings);
     } catch (error) {
@@ -63,7 +56,7 @@ const Bookings = () => {
     setSearchTerm('');
     setStartDate('');
     setEndDate('');
-    fetchBookings();
+    fetchBookings({ search: '', start: '', end: '' });
   };
 
   const openDetailsModal = (booking) => {
@@ -89,13 +82,9 @@ const Bookings = () => {
   const handleDeleteBooking = async () => {
     if (!bookingToDelete) return;
     try {
-      const { error } = await bookingService.supabase
-        .from('bookings')
-        .delete()
-        .eq('id', bookingToDelete.id);
-      if (error) throw error;
+      await bookingService.deleteBooking(bookingToDelete.id);
       toast.success('Booking deleted successfully!');
-      fetchBookings(); // Refresh the list
+      fetchBookings();
       closeDeleteModal();
     } catch (error) {
       toast.error('Error deleting booking: ' + error.message);

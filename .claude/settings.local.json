@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(find C:\\\\Users\\\\hp\\\\Desktop\\\\Benghadzi\\\\Quraac\\\\QRC\\\\bin-ali\\\\src *)",
+      "Bash(xargs grep *)",
+      "Bash(find \"C:\\\\Users\\\\hp\\\\Desktop\\\\Benghadzi\\\\Quraac\\\\QRC\\\\bin-ali\\\\src\" -type f \\\\\\( -name \"*.js\" -o -name \"*.jsx\" \\\\\\) -exec grep -l \"form\\\\|submit\\\\|input\" {} \\\\;)"
     ]
   }
 }

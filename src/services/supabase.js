@@ -122,10 +122,114 @@ export const blogService = {
   }
 }
 
+export const mediaService = {
+  // Upload a gallery image under a room-type category
+  async uploadGalleryImage(file, category) {
+    if (!supabase) throw new Error('Supabase is not configured');
+    const safeCat = category.replace(/[^a-zA-Z0-9-_]/g, '_');
+    const ext = file.name.split('.').pop();
+    const filePath = `images/${safeCat}/${Date.now()}-${Math.random().toString(36).substr(2, 6)}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('hotel-media')
+      .upload(filePath, file);
+    if (uploadError) throw uploadError;
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('hotel-media')
+      .getPublicUrl(filePath);
+
+    const { data, error } = await supabase
+      .from('media_items')
+      .insert([{ type: 'image', category, url: publicUrl, filename: file.name }])
+      .select();
+    if (error) throw error;
+    return data[0];
+  },
+
+  // Upload a video (category: 'hero_video' for the homepage hero)
+  async uploadVideo(file, category = 'hero_video') {
+    if (!supabase) throw new Error('Supabase is not configured');
+    const ext = file.name.split('.').pop();
+    const filePath = `videos/${category}/${Date.now()}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('hotel-media')
+      .upload(filePath, file, { upsert: false });
+    if (uploadError) throw uploadError;
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('hotel-media')
+      .getPublicUrl(filePath);
+
+    const { data, error } = await supabase
+      .from('media_items')
+      .insert([{ type: 'video', category, url: publicUrl, filename: file.name }])
+      .select();
+    if (error) throw error;
+    return data[0];
+  },
+
+  // Fetch media items by type; optionally filter by category
+  async getMediaItems(type, category = null) {
+    if (!supabase) return [];
+    let query = supabase
+      .from('media_items')
+      .select('*')
+      .eq('type', type)
+      .order('created_at', { ascending: false });
+    if (category) query = query.eq('category', category);
+    const { data, error } = await query;
+    if (error) throw error;
+    return data || [];
+  },
+
+  // Get the most recently uploaded hero video
+  async getHeroVideo() {
+    if (!supabase) return null;
+    const { data, error } = await supabase
+      .from('media_items')
+      .select('*')
+      .eq('type', 'video')
+      .eq('category', 'hero_video')
+      .order('created_at', { ascending: false })
+      .limit(1);
+    if (error || !data?.length) return null;
+    return data[0];
+  },
+
+  // Delete a media item (removes from storage and database)
+  async deleteMediaItem(id, url) {
+    if (!supabase) throw new Error('Supabase is not configured');
+    const parts = url.split('/object/public/hotel-media/');
+    if (parts.length > 1) {
+      const filePath = decodeURIComponent(parts[1]);
+      await supabase.storage.from('hotel-media').remove([filePath]);
+    }
+    const { error } = await supabase.from('media_items').delete().eq('id', id);
+    if (error) throw error;
+    return true;
+  },
+};
+
 export const bookingService = {
-  // All existing functions from Hyat's supabase.js
-  // Add search/filter functions:
-  async searchBookings(searchTerm) { 
+  async getAllBookings() {
+    const { data, error } = await supabase
+      .from('bookings')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data;
+  },
+  async deleteBooking(id) {
+    const { error } = await supabase
+      .from('bookings')
+      .delete()
+      .eq('id', id);
+    if (error) throw error;
+    return true;
+  },
+  async searchBookings(searchTerm) {
     const { data, error } = await supabase
       .from('bookings')
       .select('*')
@@ -133,7 +237,7 @@ export const bookingService = {
     if (error) throw error;
     return data;
   },
-  async filterBookingsByDate(startDate, endDate) { 
+  async filterBookingsByDate(startDate, endDate) {
     const { data, error } = await supabase
       .from('bookings')
       .select('*')
@@ -141,5 +245,5 @@ export const bookingService = {
       .lte('check_out_date', endDate);
     if (error) throw error;
     return data;
-  }
+  },
 }

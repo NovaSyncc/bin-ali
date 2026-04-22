@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import DOMPurify from 'dompurify';
 import { blogService } from '../../services/supabase';
 import { format } from 'date-fns';
 import PageHeader from '../../components/shared/PageHeader';
@@ -83,8 +85,28 @@ const BlogPost = () => {
     }
   };
 
+  const canonicalUrl = `https://binalihotel.com/blog/${post.slug}`;
+  const metaDescription = post.excerpt || post.title;
+  const metaImage = post.featured_image || '/og-image.jpg';
+
   return (
     <div className="min-h-screen bg-navy-deepest text-gray-100">
+      <Helmet>
+        <title>{post.title} | Bin Ali Hotel Blog</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={metaImage} />
+        <meta property="article:published_time" content={post.published_at} />
+        <meta property="article:author" content={post.author} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={metaImage} />
+      </Helmet>
       <ToastContainer position="bottom-right" theme="dark" />
       <PageHeader title={post.title} breadcrumbs={[{ name: 'Home', link: '/' }, { name: 'Blog', link: '/blog' }, { name: post.title, link: `/blog/${post.slug}` }]} />
 
@@ -104,7 +126,7 @@ const BlogPost = () => {
 
           <div
             className="prose prose-invert max-w-none text-gray-300 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
           />
 
           {post.tags && post.tags.length > 0 && (

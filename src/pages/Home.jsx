@@ -4,6 +4,7 @@ import { Bed, Calendar, Utensils, Wifi, Car, Shield, Coffee, Users } from 'lucid
 import PageTransition from '../components/shared/PageTransition';
 import Lightbox from '../components/shared/Lightbox';
 import Hero from '../components/Hero';
+import RoomPricingTable from '../components/RoomPricingTable';
 import WeddingHalls from '../components/WeddingHalls';
 import Rooms from '../components/Rooms';
 import receptionImage from '../assets/images/cover/reception.jpg';
@@ -64,6 +65,7 @@ const Home = ({ onBookNow, onBookEventHall, language = 'en' }) => {
   return (
     <PageTransition>
       <Hero onBookEventHall={onBookEventHall} language={language} />
+      <RoomPricingTable onBookNow={onBookNow} />
       <WeddingHalls language={language} />
       <Rooms onBookNow={onBookNow} language={language} />
 
