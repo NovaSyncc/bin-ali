@@ -109,7 +109,7 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
 
             {/* Subtitle */}
             <motion.p
-              className="text-base md:text-lg text-soft-white/90 mb-6 leading-relaxed"
+              className="text-base md:text-lg text-soft-white mb-6 leading-relaxed text-shadow-lg"
               variants={itemVariants}
             >
               {language === 'so'
@@ -119,7 +119,7 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
 
             {/* Location */}
             <motion.div
-              className="flex items-center gap-2 text-gold-premium font-semibold mb-6"
+              className="flex items-center gap-2 text-gold-premium font-semibold mb-6 text-shadow"
               variants={itemVariants}
             >
               <MapPin size={18} />
@@ -132,24 +132,24 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
               variants={itemVariants}
             >
               <div className="text-center premium-glass-card p-4">
-                <div className="text-3xl font-bold text-gold-premium mb-1">70+</div>
-                <div className="text-sm font-semibold text-white mb-1">{language === 'so' ? 'Qolal La Heli Karo' : 'Rooms Available'}</div>
-                <div className="text-xs text-soft-white/60">{language === 'so' ? '5 Nooc Qaaliya ah' : '5 Luxury Types'}</div>
+                <div className="text-3xl font-bold text-gold-premium mb-1 text-shadow">70+</div>
+                <div className="text-sm font-semibold text-white mb-1 text-shadow-sm">{language === 'so' ? 'Qolal La Heli Karo' : 'Rooms Available'}</div>
+                <div className="text-xs text-soft-white/80 font-medium text-shadow-sm">{language === 'so' ? '5 Nooc Qaaliya ah' : '5 Luxury Types'}</div>
               </div>
               <div className="text-center premium-glass-card p-4">
-                <div className="text-3xl font-bold text-gold-premium mb-1">2</div>
-                <div className="text-sm font-semibold text-white mb-1">{language === 'so' ? 'Hoolasha Arooska' : 'Wedding Halls'}</div>
-                <div className="text-xs text-soft-white/60">{language === 'so' ? 'Awood 300-350' : '300-350 Capacity'}</div>
+                <div className="text-3xl font-bold text-gold-premium mb-1 text-shadow">2</div>
+                <div className="text-sm font-semibold text-white mb-1 text-shadow-sm">{language === 'so' ? 'Hoolasha Arooska' : 'Wedding Halls'}</div>
+                <div className="text-xs text-soft-white/80 font-medium text-shadow-sm">{language === 'so' ? 'Awood 300-350' : '300-350 Capacity'}</div>
               </div>
               <div className="text-center premium-glass-card p-4">
-                <div className="text-3xl font-bold text-gold-premium mb-1">14+</div>
-                <div className="text-sm font-semibold text-white mb-1">{language === 'so' ? 'Adeegyo Heer Sare ah' : 'Premium Amenities'}</div>
-                <div className="text-xs text-soft-white/60">{language === 'so' ? 'Xarumaha Casriga ah' : 'Modern Facilities'}</div>
+                <div className="text-3xl font-bold text-gold-premium mb-1 text-shadow">14+</div>
+                <div className="text-sm font-semibold text-white mb-1 text-shadow-sm">{language === 'so' ? 'Adeegyo Heer Sare ah' : 'Premium Amenities'}</div>
+                <div className="text-xs text-soft-white/80 font-medium text-shadow-sm">{language === 'so' ? 'Xarumaha Casriga ah' : 'Modern Facilities'}</div>
               </div>
               <div className="text-center premium-glass-card p-4">
-                <div className="text-3xl font-bold text-gold-premium mb-1">4.0★</div>
-                <div className="text-sm font-semibold text-white mb-1">{language === 'so' ? 'Qiimeynta Martida' : 'Guest Rating'}</div>
-                <div className="text-xs text-soft-white/60">{language === 'so' ? '400+ Faallo' : '400+ Reviews'}</div>
+                <div className="text-3xl font-bold text-gold-premium mb-1 text-shadow">4.0★</div>
+                <div className="text-sm font-semibold text-white mb-1 text-shadow-sm">{language === 'so' ? 'Qiimeynta Martida' : 'Guest Rating'}</div>
+                <div className="text-xs text-soft-white/80 font-medium text-shadow-sm">{language === 'so' ? '400+ Faallo' : '400+ Reviews'}</div>
               </div>
             </motion.div>
 

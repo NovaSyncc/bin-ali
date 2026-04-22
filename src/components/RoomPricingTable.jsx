@@ -41,8 +41,8 @@ const RoomPricingTable = ({ onBookNow }) => {
               <tr className="bg-white/5 border-b border-white/10 text-gold-premium uppercase tracking-wide text-xs">
                 <th className="text-left py-4 px-6 font-semibold">Room Type</th>
                 <th className="text-center py-4 px-4 font-semibold">Guests</th>
-                <th className="text-left py-4 px-4 font-semibold">Amenities</th>
                 <th className="text-right py-4 px-6 font-semibold">Price / Night</th>
+                <th className="text-left py-4 px-4 font-semibold">Amenities</th>
                 <th className="text-center py-4 px-6 font-semibold">Book</th>
               </tr>
             </thead>
@@ -58,6 +58,11 @@ const RoomPricingTable = ({ onBookNow }) => {
                   <td className="py-4 px-4 text-center text-soft-white/70">
                     {room.capacity === 1 ? '1 guest' : `Up to ${room.capacity}`}
                   </td>
+                  <td className="py-4 px-6 text-right">
+                    <span className="text-gold-premium font-bold text-lg">
+                      KES {room.price.toLocaleString()}
+                    </span>
+                  </td>
                   <td className="py-4 px-4">
                     <div className="flex flex-wrap gap-1.5">
                       {room.amenities.map((a) => (
@@ -70,11 +75,6 @@ const RoomPricingTable = ({ onBookNow }) => {
                         </span>
                       ))}
                     </div>
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <span className="text-gold-premium font-bold text-lg">
-                      KES {room.price.toLocaleString()}
-                    </span>
                   </td>
                   <td className="py-4 px-6 text-center">
                     <div className="flex items-center justify-center gap-2">

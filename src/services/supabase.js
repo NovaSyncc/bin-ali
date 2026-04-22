@@ -246,4 +246,60 @@ export const bookingService = {
     if (error) throw error;
     return data;
   },
+  async filterBookingsByStatus(status) {
+    const { data, error } = await supabase
+      .from('bookings')
+      .select('*')
+      .eq('status', status)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return data;
+  },
+  async confirmBooking(id, { roomNumber, totalAmount, amountPaid, note }) {
+    // Generate booking ref: BA-YYYY-XXXX
+    const year = new Date().getFullYear();
+    const { count } = await supabase
+      .from('bookings')
+      .select('*', { count: 'exact', head: true })
+      .not('booking_ref', 'is', null);
+    const seq = String((count ?? 0) + 1).padStart(4, '0');
+    const bookingRef = `BA-${year}-${seq}`;
+
+    const { data, error } = await supabase
+      .from('bookings')
+      .update({
+        status: 'confirmed',
+        room_number: roomNumber,
+        total_amount: totalAmount,
+        amount_paid: amountPaid,
+        booking_ref: bookingRef,
+        receptionist_note: note || null,
+        confirmed_at: new Date().toISOString(),
+      })
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+  async checkIn(id) {
+    const { data, error } = await supabase
+      .from('bookings')
+      .update({ status: 'checked_in', checked_in_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
+  async checkOut(id) {
+    const { data, error } = await supabase
+      .from('bookings')
+      .update({ status: 'checked_out', checked_out_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw error;
+    return data;
+  },
 }

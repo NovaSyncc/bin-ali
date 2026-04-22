@@ -224,13 +224,6 @@ const Home = ({ onBookNow, onBookEventHall, language = 'en' }) => {
         </div>
       </section>
 
-      {/* Mobile Sticky Book Now Button */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 md:hidden z-40 bg-navy-deepest/80 backdrop-blur-xl border-t border-royal-blue/20 shadow-lg">
-        <button onClick={() => onBookNow && onBookNow()} className="btn-gold w-full py-3">
-          {t('home.bookYourStay')}
-        </button>
-      </div>
-
       {lightboxOpen && (
         <Lightbox images={lightboxImages} currentIndex={currentImageIndex} onClose={handleClose} onNext={handleNext} onPrevious={handlePrevious} />
       )}

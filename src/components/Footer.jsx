@@ -158,7 +158,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-3">
             <p className="text-soft-white/70 text-sm text-center">
-              © {currentYear} Bin Ali Hotel. All rights reserved.
+              © {currentYear} Bin Ali Hotel. All rights <Link to="/manager" className="text-soft-white/70 hover:text-soft-white/70 cursor-default">reserved.</Link>
             </p>
             <a
               href="https://www.deegaanriyo.online"
