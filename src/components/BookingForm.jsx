@@ -104,7 +104,7 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-5 md:p-6 space-y-4 overflow-y-auto custom-scrollbar">
+        <form className="p-5 md:p-6 space-y-4 overflow-y-auto custom-scrollbar relative z-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Full Name */}
             <div>
@@ -252,13 +252,18 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <button type="button" onClick={onClose} className="btn-glass flex-1 py-3 text-sm cursor-pointer order-2 sm:order-1">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2 relative z-30">
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn-glass flex-1 py-3 text-sm cursor-pointer order-2 sm:order-1"
+            >
               {t('booking.cancel')}
             </button>
             <button
-              type="submit"
-              className="btn-gold flex-1 py-3 text-sm cursor-pointer order-1 sm:order-2"
+              type="button"
+              onClick={handleSubmit}
+              className="btn-gold flex-1 py-3 text-sm cursor-pointer order-1 sm:order-2 active:scale-95 transition-transform"
             >
               {isSubmitting ? (language === 'so' ? 'Diraya...' : 'Sending...') : t('booking.submit')}
             </button>
