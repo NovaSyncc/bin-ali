@@ -18,8 +18,21 @@ const EventBookingForm = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic to handle event booking
-    console.log('Event Booking Form Data:', formData);
+    const message = `Hello Bin Ali Hotel,
+
+I would like to book an event hall:
+
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}
+*Event Type:* ${formData.eventType}
+*Event Date:* ${formData.date}
+*Number of Guests:* ${formData.guests}${formData.message ? `\n*Message:* ${formData.message}` : ''}
+
+Please confirm availability.
+
+Thank you`;
+    const whatsappUrl = `https://wa.me/252791110089?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
     onClose();
   };
 
