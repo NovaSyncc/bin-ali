@@ -2,7 +2,7 @@ import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
   const handleWhatsAppClick = () => {
-    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '252791110089';
+    const whatsappNumber = '252791110089';
     const message = encodeURIComponent('Hello, I would like to get more information about Bin Ali Hotel.');
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
   };

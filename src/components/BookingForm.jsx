@@ -60,7 +60,10 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
     try {
       await bookingService.createBooking(formData);
     } catch (err) {
-      console.error('Failed to save booking to database:', err);
+      // Show the real DB error so it's not invisible
+      setErrors({ submit: `Could not save booking: ${err.message}` });
+      setIsSubmitting(false);
+      return;
     }
     const success = handleWhatsAppBooking(formData);
     if (success) {

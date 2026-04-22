@@ -215,6 +215,8 @@ export const mediaService = {
 export const bookingService = {
   async createBooking(formData) {
     if (!supabase) throw new Error('Supabase is not configured');
+    // Note: 'status' is omitted — it defaults to 'pending' via the DB column default.
+    // Omitting it keeps inserts working even if booking_status_migration.sql hasn't run.
     const { data, error } = await supabase
       .from('bookings')
       .insert([{
@@ -226,7 +228,7 @@ export const bookingService = {
         rooms: formData.roomType,
         guests: Number(formData.numberOfGuests),
         special_requests: formData.specialRequests || null,
-        status: 'pending',
+        language: 'en',
       }])
       .select()
       .single();
