@@ -31,7 +31,7 @@ I would like to book an event hall:
 Please confirm availability.
 
 Thank you`;
-    const whatsappUrl = `https://wa.me/252791110089?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/254791110089?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     onClose();
   };

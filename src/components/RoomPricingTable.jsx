@@ -11,7 +11,7 @@ const amenityIcons = {
 };
 
 const RECEPTION_PHONE = import.meta.env.VITE_HOTEL_PHONE || '0791110089';
-const WHATSAPP_NUMBER = '252791110089';
+const WHATSAPP_NUMBER = '254791110089';
 
 const RoomPricingTable = ({ onBookNow }) => {
   const handleWhatsApp = (roomType) => {

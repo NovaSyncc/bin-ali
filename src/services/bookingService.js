@@ -61,7 +61,7 @@ Thank you`;
 export const handleWhatsAppBooking = (bookingData) => {
   try {
     // Bin Ali Hotel WhatsApp — hardcoded to avoid Vercel env var override
-    const whatsappNumber = '252791110089';
+    const whatsappNumber = '254791110089';
 
     // Format the booking message
     const message = formatWhatsAppMessage(bookingData);

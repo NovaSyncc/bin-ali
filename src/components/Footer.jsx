@@ -132,7 +132,7 @@ const Footer = () => {
                   className="flex-shrink-0 text-soft-white/70"
                 />
                 <a
-                  href="tel:+252791110089"
+                  href="tel:+254791110089"
                   className="text-soft-white/90 text-sm hover:text-sky-blue transition-colors duration-300"
                 >
                   0791110089
