@@ -92,23 +92,23 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={onClose}>
       <div className="absolute inset-0 bg-slate-black/70" />
 
-      <div className="relative premium-glass-card max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-        <div className="sticky top-0 bg-gradient-to-br from-gold-premium to-gold-warm text-navy-deepest p-6 flex items-center justify-between rounded-t-3xl z-10">
-          <h2 className="text-2xl font-bold font-playfair">{t('booking.title')}</h2>
+      <div className="relative premium-glass-card max-w-xl w-full max-h-[95vh] flex flex-col" onClick={e => e.stopPropagation()}>
+        <div className="sticky top-0 bg-gradient-to-br from-gold-premium to-gold-warm text-navy-deepest p-5 flex items-center justify-between rounded-t-3xl z-10 shrink-0 shadow-lg">
+          <h2 className="text-xl md:text-2xl font-bold font-playfair">{t('booking.title')}</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-black/10 rounded-full transition-colors"
             aria-label={t('common.close')}
           >
-            <X size={24} />
+            <X size={22} />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-5 md:p-6 space-y-4 overflow-y-auto custom-scrollbar">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Full Name */}
             <div>
-              <label htmlFor="fullName" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.fullName')} *</label>
+              <label htmlFor="fullName" className="block text-xs md:text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.fullName')} *</label>
               <div className="relative">
                 <User size={18} className={inputIconClasses} />
                 <input
@@ -117,16 +117,16 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.fullName ? 'border-red-500' : ''}`}
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 text-sm ${errors.fullName ? 'border-red-500' : ''}`}
                   placeholder={t('booking.enterName')}
                 />
               </div>
-              {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
+              {errors.fullName && <p className="text-red-500 text-[10px] mt-1">{errors.fullName}</p>}
             </div>
 
             {/* Phone Number */}
             <div>
-              <label htmlFor="phoneNumber" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.phone')} *</label>
+              <label htmlFor="phoneNumber" className="block text-xs md:text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.phone')} *</label>
               <PhoneInput
                 international
                 defaultCountry="KE"
@@ -137,15 +137,15 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                     setErrors(prev => ({ ...prev, phoneNumber: '' }));
                   }
                 }}
-                className={`phone-input-custom ${errors.phoneNumber ? 'phone-input-error' : ''}`}
+                className={`phone-input-custom text-sm ${errors.phoneNumber ? 'phone-input-error' : ''}`}
                 placeholder={t('booking.enterPhone')}
               />
-              {errors.phoneNumber && <p className="text-red-500 text-xs mt-1">{errors.phoneNumber}</p>}
+              {errors.phoneNumber && <p className="text-red-500 text-[10px] mt-1">{errors.phoneNumber}</p>}
             </div>
 
             {/* Check-in Date */}
             <div>
-              <label htmlFor="checkInDate" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.checkIn')} *</label>
+              <label htmlFor="checkInDate" className="block text-xs md:text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.checkIn')} *</label>
               <div className="relative">
                 <Calendar size={18} className={inputIconClasses} />
                 <input
@@ -156,15 +156,15 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                   onChange={handleChange}
                   min={today}
                   max={maxDateString}
-                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.checkInDate ? 'border-red-500' : ''}`}
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 text-sm ${errors.checkInDate ? 'border-red-500' : ''}`}
                 />
               </div>
-              {errors.checkInDate && <p className="text-red-500 text-xs mt-1">{errors.checkInDate}</p>}
+              {errors.checkInDate && <p className="text-red-500 text-[10px] mt-1">{errors.checkInDate}</p>}
             </div>
 
             {/* Number of Days */}
             <div>
-              <label htmlFor="numberOfDays" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{language === 'so' ? 'Tirada Maalmaha' : 'Number of Days'} *</label>
+              <label htmlFor="numberOfDays" className="block text-xs md:text-sm font-semibold text-soft-white/80 mb-1.5">{language === 'so' ? 'Tirada Maalmaha' : 'Number of Days'} *</label>
               <div className="relative">
                 <Calendar size={18} className={inputIconClasses} />
                 <input
@@ -175,39 +175,22 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                   onChange={handleChange}
                   min="1"
                   max="46"
-                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.numberOfDays ? 'border-red-500' : ''}`}
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 text-sm ${errors.numberOfDays ? 'border-red-500' : ''}`}
                 />
               </div>
-              {errors.numberOfDays && <p className="text-red-500 text-xs mt-1">{errors.numberOfDays}</p>}
-            </div>
-
-            {/* Check-out Date (Auto-calculated) */}
-            <div>
-              <label htmlFor="checkOutDate" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{language === 'so' ? 'Taariikhda Bixitaanka' : 'Check-out Date'}</label>
-              <div className="relative">
-                <Calendar size={18} className={inputIconClasses} />
-                <input
-                  type="date"
-                  id="checkOutDate"
-                  name="checkOutDate"
-                  value={formData.checkOutDate}
-                  readOnly
-                  disabled
-                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 cursor-not-allowed opacity-75`}
-                />
-              </div>
+              {errors.numberOfDays && <p className="text-red-500 text-[10px] mt-1">{errors.numberOfDays}</p>}
             </div>
 
             {/* Room Type */}
             <div>
-              <label htmlFor="roomType" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.roomType')} *</label>
+              <label htmlFor="roomType" className="block text-xs md:text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.roomType')} *</label>
               <div className="relative">
                 <select
                   id="roomType"
                   name="roomType"
                   value={formData.roomType}
                   onChange={handleChange}
-                  className={`${inputBaseClasses} px-4 py-2.5 pr-10 cursor-pointer ${errors.roomType ? 'border-red-500' : ''}`}
+                  className={`${inputBaseClasses} px-4 py-2.5 pr-10 text-sm cursor-pointer ${errors.roomType ? 'border-red-500' : ''}`}
                   style={{ backgroundImage: 'none' }}
                 >
                   <option value="">{t('booking.selectRoom')}</option>
@@ -223,12 +206,12 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                   </svg>
                 </div>
               </div>
-              {errors.roomType && <p className="text-red-500 text-xs mt-1">{errors.roomType}</p>}
+              {errors.roomType && <p className="text-red-500 text-[10px] mt-1">{errors.roomType}</p>}
             </div>
 
             {/* Number of Guests */}
             <div>
-              <label htmlFor="numberOfGuests" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.guests')} *</label>
+              <label htmlFor="numberOfGuests" className="block text-xs md:text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.guests')} *</label>
               <div className="relative">
                 <Users size={18} className={inputIconClasses} />
                 <input
@@ -239,16 +222,16 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                   onChange={handleChange}
                   min="1"
                   max="10"
-                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.numberOfGuests ? 'border-red-500' : ''}`}
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 text-sm ${errors.numberOfGuests ? 'border-red-500' : ''}`}
                 />
               </div>
-              {errors.numberOfGuests && <p className="text-red-500 text-xs mt-1">{errors.numberOfGuests}</p>}
+              {errors.numberOfGuests && <p className="text-red-500 text-[10px] mt-1">{errors.numberOfGuests}</p>}
             </div>
           </div>
 
           {/* Special Requests */}
           <div>
-            <label htmlFor="specialRequests" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.specialRequests')} ({language === 'so' ? 'Ikhtiyaari' : 'Optional'})</label>
+            <label htmlFor="specialRequests" className="block text-xs md:text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.specialRequests')} ({language === 'so' ? 'Ikhtiyaari' : 'Optional'})</label>
             <div className="relative">
               <MessageSquare size={18} className="absolute left-3 top-3 text-soft-white/50" />
               <textarea
@@ -257,35 +240,35 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                 value={formData.specialRequests}
                 onChange={handleChange}
                 rows="2"
-                className={`${inputBaseClasses} pl-10 pr-4 py-2.5`}
+                className={`${inputBaseClasses} pl-10 pr-4 py-2.5 text-sm`}
                 placeholder={t('booking.anySpecialRequests')}
               />
             </div>
           </div>
 
           {errors.submit && (
-            <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-2 rounded-lg text-sm">
+            <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-2 rounded-lg text-xs">
               {errors.submit}
             </div>
           )}
 
-          <div className="flex gap-4 pt-2">
-            <button type="button" onClick={onClose} className="btn-glass flex-1 py-3">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <button type="button" onClick={onClose} className="btn-glass flex-1 py-3 text-sm cursor-pointer order-2 sm:order-1">
               {t('booking.cancel')}
             </button>
             <button
               type="submit"
-              disabled={isSubmitting}
-              className={`btn-gold flex-1 py-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className="btn-gold flex-1 py-3 text-sm cursor-pointer order-1 sm:order-2"
             >
               {isSubmitting ? (language === 'so' ? 'Diraya...' : 'Sending...') : t('booking.submit')}
             </button>
           </div>
 
-          <p className="text-xs text-soft-white/60 text-center">
+          <p className="text-[10px] md:text-xs text-soft-white/60 text-center">
             {language === 'so' ? 'Codsigaaga buugista ayaa loo diri doonaa WhatsApp si loo xaqiijiyo' : 'Your booking request will be sent via WhatsApp for confirmation.'}
           </p>
         </form>
+      </div>
       </div>
     </div>
   );
