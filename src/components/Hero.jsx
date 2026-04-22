@@ -209,7 +209,7 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
                     objectPosition: 'center'
                   }}
                 >
-                  <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/HeroloopPotrait.MOV" type="video/mp4" />
+                  <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/0422(1).mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
