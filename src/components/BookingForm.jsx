@@ -104,186 +104,185 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-6">
-          {/* Full Name */}
-          <div>
-            <label htmlFor="fullName" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.fullName')} *</label>
-            <div className="relative">
-              <User size={20} className={inputIconClasses} />
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                className={`${inputBaseClasses} pl-10 pr-4 py-3 ${errors.fullName ? 'border-red-500' : ''}`}
-                placeholder={t('booking.enterName')}
-              />
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Full Name */}
+            <div>
+              <label htmlFor="fullName" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.fullName')} *</label>
+              <div className="relative">
+                <User size={18} className={inputIconClasses} />
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.fullName ? 'border-red-500' : ''}`}
+                  placeholder={t('booking.enterName')}
+                />
+              </div>
+              {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
             </div>
-            {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
-          </div>
 
-          {/* Phone Number */}
-          <div>
-            <label htmlFor="phoneNumber" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.phone')} *</label>
-            <PhoneInput
-              international
-              defaultCountry="KE"
-              value={formData.phoneNumber}
-              onChange={(value) => {
-                setFormData(prev => ({ ...prev, phoneNumber: value || '' }));
-                if (errors.phoneNumber) {
-                  setErrors(prev => ({ ...prev, phoneNumber: '' }));
-                }
-              }}
-              className={`phone-input-custom ${errors.phoneNumber ? 'phone-input-error' : ''}`}
-              placeholder={t('booking.enterPhone')}
-            />
-            {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>}
-          </div>
-
-          {/* Check-in Date */}
-          <div>
-            <label htmlFor="checkInDate" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.checkIn')} *</label>
-            <div className="relative">
-              <Calendar size={20} className={inputIconClasses} />
-              <input
-                type="date"
-                id="checkInDate"
-                name="checkInDate"
-                value={formData.checkInDate}
-                onChange={handleChange}
-                min={today}
-                max={maxDateString}
-                className={`${inputBaseClasses} pl-10 pr-4 py-3 ${errors.checkInDate ? 'border-red-500' : ''}`}
+            {/* Phone Number */}
+            <div>
+              <label htmlFor="phoneNumber" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.phone')} *</label>
+              <PhoneInput
+                international
+                defaultCountry="KE"
+                value={formData.phoneNumber}
+                onChange={(value) => {
+                  setFormData(prev => ({ ...prev, phoneNumber: value || '' }));
+                  if (errors.phoneNumber) {
+                    setErrors(prev => ({ ...prev, phoneNumber: '' }));
+                  }
+                }}
+                className={`phone-input-custom ${errors.phoneNumber ? 'phone-input-error' : ''}`}
+                placeholder={t('booking.enterPhone')}
               />
+              {errors.phoneNumber && <p className="text-red-500 text-xs mt-1">{errors.phoneNumber}</p>}
             </div>
-            {errors.checkInDate && <p className="text-red-500 text-sm mt-1">{errors.checkInDate}</p>}
-            <p className="text-xs text-soft-white/60 mt-1">{language === 'so' ? 'Waxaad buugin kartaa ilaa 46 maalmood hore' : 'You can book up to 46 days in advance.'}</p>
-          </div>
 
-          {/* Number of Days */}
-          <div>
-            <label htmlFor="numberOfDays" className="block text-sm font-semibold text-soft-white/80 mb-2">{language === 'so' ? 'Tirada Maalmaha' : 'Number of Days'} *</label>
-            <div className="relative">
-              <Calendar size={20} className={inputIconClasses} />
-              <input
-                type="number"
-                id="numberOfDays"
-                name="numberOfDays"
-                value={formData.numberOfDays}
-                onChange={handleChange}
-                min="1"
-                max="46"
-                className={`${inputBaseClasses} pl-10 pr-4 py-3 ${errors.numberOfDays ? 'border-red-500' : ''}`}
-              />
+            {/* Check-in Date */}
+            <div>
+              <label htmlFor="checkInDate" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.checkIn')} *</label>
+              <div className="relative">
+                <Calendar size={18} className={inputIconClasses} />
+                <input
+                  type="date"
+                  id="checkInDate"
+                  name="checkInDate"
+                  value={formData.checkInDate}
+                  onChange={handleChange}
+                  min={today}
+                  max={maxDateString}
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.checkInDate ? 'border-red-500' : ''}`}
+                />
+              </div>
+              {errors.checkInDate && <p className="text-red-500 text-xs mt-1">{errors.checkInDate}</p>}
             </div>
-            {errors.numberOfDays && <p className="text-red-500 text-sm mt-1">{errors.numberOfDays}</p>}
-            <p className="text-xs text-soft-white/60 mt-1">{language === 'so' ? 'Dooro inta maalmood aad joogi doonto' : 'Select how many days you will stay'}</p>
-          </div>
 
-          {/* Check-out Date (Auto-calculated) */}
-          <div>
-            <label htmlFor="checkOutDate" className="block text-sm font-semibold text-soft-white/80 mb-2">{language === 'so' ? 'Taariikhda Bixitaanka' : 'Check-out Date'}</label>
-            <div className="relative">
-              <Calendar size={20} className={inputIconClasses} />
-              <input
-                type="date"
-                id="checkOutDate"
-                name="checkOutDate"
-                value={formData.checkOutDate}
-                readOnly
-                disabled
-                className={`${inputBaseClasses} pl-10 pr-4 py-3 cursor-not-allowed opacity-75`}
-              />
+            {/* Number of Days */}
+            <div>
+              <label htmlFor="numberOfDays" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{language === 'so' ? 'Tirada Maalmaha' : 'Number of Days'} *</label>
+              <div className="relative">
+                <Calendar size={18} className={inputIconClasses} />
+                <input
+                  type="number"
+                  id="numberOfDays"
+                  name="numberOfDays"
+                  value={formData.numberOfDays}
+                  onChange={handleChange}
+                  min="1"
+                  max="46"
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.numberOfDays ? 'border-red-500' : ''}`}
+                />
+              </div>
+              {errors.numberOfDays && <p className="text-red-500 text-xs mt-1">{errors.numberOfDays}</p>}
             </div>
-            <p className="text-xs text-soft-white/60 mt-1">{language === 'so' ? 'Waxaa si toos ah loo xisaabiyo maalinta bixitaanka' : 'Automatically calculated based on check-in and number of days'}</p>
-          </div>
 
-          {/* Room Type */}
-          <div>
-            <label htmlFor="roomType" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.roomType')} *</label>
-            <div className="relative">
-              <select
-                id="roomType"
-                name="roomType"
-                value={formData.roomType}
-                onChange={handleChange}
-                className={`${inputBaseClasses} px-4 py-3 pr-10 cursor-pointer ${errors.roomType ? 'border-red-500' : ''}`}
-                style={{ backgroundImage: 'none' }}
-              >
-                <option value="">{t('booking.selectRoom')}</option>
-                {rooms.map((room) => (
-                  <option key={room.id} value={room.type} className="bg-navy-deepest text-soft-white">
-                    {room.type} - KES {room.price.toLocaleString()}/{language === 'so' ? 'habeen' : 'night'}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <svg className="w-5 h-5 text-soft-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+            {/* Check-out Date (Auto-calculated) */}
+            <div>
+              <label htmlFor="checkOutDate" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{language === 'so' ? 'Taariikhda Bixitaanka' : 'Check-out Date'}</label>
+              <div className="relative">
+                <Calendar size={18} className={inputIconClasses} />
+                <input
+                  type="date"
+                  id="checkOutDate"
+                  name="checkOutDate"
+                  value={formData.checkOutDate}
+                  readOnly
+                  disabled
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 cursor-not-allowed opacity-75`}
+                />
               </div>
             </div>
-            {errors.roomType && <p className="text-red-500 text-sm mt-1">{errors.roomType}</p>}
-          </div>
 
-          {/* Number of Guests */}
-          <div>
-            <label htmlFor="numberOfGuests" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.guests')} *</label>
-            <div className="relative">
-              <Users size={20} className={inputIconClasses} />
-              <input
-                type="number"
-                id="numberOfGuests"
-                name="numberOfGuests"
-                value={formData.numberOfGuests}
-                onChange={handleChange}
-                min="1"
-                max="10"
-                className={`${inputBaseClasses} pl-10 pr-4 py-3 ${errors.numberOfGuests ? 'border-red-500' : ''}`}
-              />
+            {/* Room Type */}
+            <div>
+              <label htmlFor="roomType" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.roomType')} *</label>
+              <div className="relative">
+                <select
+                  id="roomType"
+                  name="roomType"
+                  value={formData.roomType}
+                  onChange={handleChange}
+                  className={`${inputBaseClasses} px-4 py-2.5 pr-10 cursor-pointer ${errors.roomType ? 'border-red-500' : ''}`}
+                  style={{ backgroundImage: 'none' }}
+                >
+                  <option value="">{t('booking.selectRoom')}</option>
+                  {rooms.map((room) => (
+                    <option key={room.id} value={room.type} className="bg-navy-deepest text-soft-white">
+                      {room.type} - KES {room.price.toLocaleString()}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg className="w-4 h-4 text-soft-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+              {errors.roomType && <p className="text-red-500 text-xs mt-1">{errors.roomType}</p>}
             </div>
-            {errors.numberOfGuests && <p className="text-red-500 text-sm mt-1">{errors.numberOfGuests}</p>}
+
+            {/* Number of Guests */}
+            <div>
+              <label htmlFor="numberOfGuests" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.guests')} *</label>
+              <div className="relative">
+                <Users size={18} className={inputIconClasses} />
+                <input
+                  type="number"
+                  id="numberOfGuests"
+                  name="numberOfGuests"
+                  value={formData.numberOfGuests}
+                  onChange={handleChange}
+                  min="1"
+                  max="10"
+                  className={`${inputBaseClasses} pl-10 pr-4 py-2.5 ${errors.numberOfGuests ? 'border-red-500' : ''}`}
+                />
+              </div>
+              {errors.numberOfGuests && <p className="text-red-500 text-xs mt-1">{errors.numberOfGuests}</p>}
+            </div>
           </div>
 
           {/* Special Requests */}
           <div>
-            <label htmlFor="specialRequests" className="block text-sm font-semibold text-soft-white/80 mb-2">{t('booking.specialRequests')} ({language === 'so' ? 'Ikhtiyaari' : 'Optional'})</label>
+            <label htmlFor="specialRequests" className="block text-sm font-semibold text-soft-white/80 mb-1.5">{t('booking.specialRequests')} ({language === 'so' ? 'Ikhtiyaari' : 'Optional'})</label>
             <div className="relative">
-              <MessageSquare size={20} className="absolute left-3 top-3.5 text-soft-white/50" />
+              <MessageSquare size={18} className="absolute left-3 top-3 text-soft-white/50" />
               <textarea
                 id="specialRequests"
                 name="specialRequests"
                 value={formData.specialRequests}
                 onChange={handleChange}
-                rows="4"
-                className={`${inputBaseClasses} pl-10 pr-4 py-3`}
+                rows="2"
+                className={`${inputBaseClasses} pl-10 pr-4 py-2.5`}
                 placeholder={t('booking.anySpecialRequests')}
               />
             </div>
           </div>
 
           {errors.submit && (
-            <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg">
+            <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-4 py-2 rounded-lg text-sm">
               {errors.submit}
             </div>
           )}
 
-          <div className="flex gap-4 pt-4">
-            <button type="button" onClick={onClose} className="btn-glass flex-1">
+          <div className="flex gap-4 pt-2">
+            <button type="button" onClick={onClose} className="btn-glass flex-1 py-3">
               {t('booking.cancel')}
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`btn-gold flex-1 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`btn-gold flex-1 py-3 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {isSubmitting ? (language === 'so' ? 'Diraya...' : 'Sending...') : t('booking.submit')}
             </button>
           </div>
 
-          <p className="text-sm text-soft-white/60 text-center">
+          <p className="text-xs text-soft-white/60 text-center">
             {language === 'so' ? 'Codsigaaga buugista ayaa loo diri doonaa WhatsApp si loo xaqiijiyo' : 'Your booking request will be sent via WhatsApp for confirmation.'}
           </p>
         </form>
