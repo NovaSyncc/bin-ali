@@ -60,9 +60,8 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
     try {
       await bookingService.createBooking(formData);
     } catch (err) {
-      setErrors({ submit: 'Failed to save booking. Please try again or contact the hotel directly.' });
-      setIsSubmitting(false);
-      return;
+      // Non-blocking: log the error but continue to send via WhatsApp
+      console.warn('Booking DB save failed (continuing with WhatsApp):', err?.message ?? err);
     }
     const success = handleWhatsAppBooking(formData);
     if (success) {
@@ -175,7 +174,7 @@ const BookingForm = ({ isOpen, onClose, preSelectedRoom = null, language = 'en' 
                   <label className={label}>{t('booking.phone')} <span className="text-gold-premium">*</span></label>
                   <PhoneInput
                     international
-                    defaultCountry="SO"
+                    defaultCountry="KE"
                     value={formData.phoneNumber}
                     onChange={(value) => {
                       setFormData(prev => ({ ...prev, phoneNumber: value || '' }));

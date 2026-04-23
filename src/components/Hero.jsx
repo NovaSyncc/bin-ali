@@ -101,9 +101,9 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
               className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold mb-4 leading-tight"
               variants={itemVariants}
             >
-              {language === 'so' ? 'Goobaha Arooska Qaaliga ah & ' : 'Luxury Wedding Venues & '}
+              {language === 'so' ? 'Hoteelka Qaaliga ah & ' : 'Luxury Hotel & '}
               <span className="bg-gradient-to-r from-gold-premium via-gold-warm to-gold-premium bg-clip-text text-transparent">
-                {language === 'so' ? 'Martiqaad Heer Sare ah' : 'Premium Hospitality'}
+                {language === 'so' ? 'Goobaha Xafladaha Heer Sare ah' : 'Premium Event Venues'}
               </span>
             </motion.h1>
 
@@ -113,8 +113,8 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
               variants={itemVariants}
             >
               {language === 'so'
-                ? 'Hoolal qurux badan, xafladaha la xasuusan karo, iyo adeeg cajiib ah dhexda Eastleigh'
-                : 'Elegant halls, memorable celebrations, and exceptional service in the heart of Eastleigh'}
+                ? 'Qolal casri ah, hoolal qurux badan, iyo adeeg heer sare ah — wax kasta oo aad u baahan tahay dhexda Eastleigh, Nairobi'
+                : 'Elegantly appointed rooms, stunning wedding halls, and world-class service — all under one roof in the heart of Eastleigh, Nairobi'}
             </motion.p>
 
             {/* Location */}
@@ -158,15 +158,17 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
               className="flex flex-col sm:flex-row gap-4"
               variants={itemVariants}
             >
-              <motion.button
-                onClick={onBookEventHall}
+              <motion.a
+                href="https://wa.me/254791110089?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20booking%20a%20hall%20at%20Bin%20Ali%20Hotel.%20Could%20you%20please%20share%20availability%20and%20pricing%3F"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-gold"
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
               >
-                {language === 'so' ? 'Buugi Hoolka Arooska' : 'Book Wedding Hall'}
-              </motion.button>
+                {language === 'so' ? 'Xiriir Buugista Hoolka' : 'Contact for Hall Booking'}
+              </motion.a>
               <motion.button
                 onClick={scrollToRooms}
                 className="btn-glass"
