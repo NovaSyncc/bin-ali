@@ -58,7 +58,7 @@ function ReceiptDoc({ booking, logoDataUrl }) {
         <div style={{ flex: 1 }}>
           <div style={{ fontWeight: 800, fontSize: 16, color: '#1a237e', letterSpacing: 0.5 }}>BIN ALI HOTEL</div>
           <div style={{ fontSize: 10, color: '#555', marginTop: 2 }}>Benghadzi, Somalia</div>
-          <div style={{ fontSize: 10, color: '#555' }}>Tel: +252 791 110 089</div>
+          <div style={{ fontSize: 10, color: '#555' }}>Tel: +254 791 110 089</div>
         </div>
         <div style={{ textAlign: 'right', flexShrink: 0 }}>
           <div style={{ background: '#1a237e', color: '#fff', fontWeight: 800, fontSize: 13, letterSpacing: 2, padding: '5px 14px', borderRadius: 6, display: 'inline-block' }}>
