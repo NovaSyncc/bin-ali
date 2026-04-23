@@ -1,16 +1,27 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, MapPin } from 'lucide-react';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
+import receptionImage2 from '../assets/images/newreception2.png';
 import { getTranslation } from '../utils/translations';
+
+const receptionImages = [receptionImage, receptionImage2];
 
 const Hero = ({ onBookEventHall, language = 'en' }) => {
   const t = (key) => getTranslation(language, key);
   const [isVisible, setIsVisible] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prev => (prev + 1) % receptionImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToRooms = () => {
@@ -85,7 +96,7 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
           className="hero-content-panel"
           variants={contentPanelVariants}
         >
-          <div className="max-w-lg w-full">
+          <div className="max-w-lg w-full" style={{ pointerEvents: 'auto' }}>
             {/* Breadcrumb */}
             <motion.nav
               className="flex items-center gap-2 text-sm text-gold-premium/80 mb-6"
@@ -189,32 +200,16 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
         >
           <div className="hero-image-container">
             <div className="hero-slideshow">
-              {/* Fallback Poster Image */}
-              <img
-                src={receptionImage}
-                alt="Bin Ali Hotel - Luxury Wedding Venue"
-                className="hero-slideshow-image active"
-                loading="eager"
-              />
-
-              {/* Local Video - Full Container Fill */}
-              <div className="absolute inset-0 z-[1]">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster={receptionImage}
-                  className="absolute inset-0 w-full h-full pointer-events-none"
-                  style={{
-                    objectFit: 'cover',
-                    objectPosition: 'center'
-                  }}
-                >
-                  <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/0422(1).mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+              {/* Reception images slideshow */}
+              {receptionImages.map((src, index) => (
+                <img
+                  key={index}
+                  src={src}
+                  alt="Bin Ali Hotel - Reception"
+                  className={`hero-slideshow-image ${index === currentImageIndex ? 'active' : ''}`}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              ))}
 
               {/* Dark overlay for readability */}
               <div className="hero-image-overlay"></div>

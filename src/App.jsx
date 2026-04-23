@@ -90,7 +90,7 @@ function App() {
 
             {/* Dashboard Routes */}
             <Route path="/manager" element={<Dashboard />}>
-              <Route index element={<Overview />} />
+              <Route index element={<Bookings />} />
               <Route path="overview" element={<Overview />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="blog-posts" element={<BlogPosts />} />

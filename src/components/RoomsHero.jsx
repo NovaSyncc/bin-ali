@@ -129,7 +129,7 @@ const RoomsHero = ({ onBookNow, language = 'en' }) => {
           className="hero-content-panel"
           variants={contentPanelVariants}
         >
-          <div className="max-w-lg w-full">
+          <div className="max-w-lg w-full" style={{ pointerEvents: 'auto' }}>
             {/* Breadcrumb */}
             <motion.nav
               className="flex items-center gap-2 text-sm text-gold-premium/80 mb-6"
