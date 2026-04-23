@@ -7,7 +7,7 @@ import Hero from '../components/Hero';
 import RoomPricingTable from '../components/RoomPricingTable';
 import WeddingHalls from '../components/WeddingHalls';
 import Rooms from '../components/Rooms';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
 import { blogService } from '../services/supabase';
 import { format } from 'date-fns';
 import { getTranslation } from '../utils/translations';

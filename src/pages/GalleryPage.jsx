@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PageTransition from '../components/shared/PageTransition';
 import Lightbox from '../components/shared/Lightbox';
 import PageHeader from '../components/shared/PageHeader';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
 import { rooms } from '../data/rooms';
 
 const GalleryPage = () => {

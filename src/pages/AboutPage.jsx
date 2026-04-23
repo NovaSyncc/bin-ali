@@ -2,7 +2,7 @@ import { MapPin, Star, Coffee, Wifi, Car, Shield, Award, Heart, Users as UsersIc
 import PageTransition from '../components/shared/PageTransition';
 import GlassCard from '../components/shared/GlassCard';
 import PageHeader from '../components/shared/PageHeader';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
 import { getTranslation } from '../utils/translations';
 
 const AboutPage = ({ language = 'en' }) => {

@@ -2,7 +2,7 @@ import { Utensils, Clock, Coffee, Users, ChefHat, Leaf } from 'lucide-react';
 import PageTransition from '../components/shared/PageTransition';
 import GlassCard from '../components/shared/GlassCard';
 import PageHeader from '../components/shared/PageHeader';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
 
 const RestaurantPage = () => {
   const services = [

@@ -1,5 +1,5 @@
 import { MapPin, Star, Users, Wifi, Car, Shield } from 'lucide-react';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
 
 const About = () => {
   const features = [

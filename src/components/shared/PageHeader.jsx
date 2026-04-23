@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import receptionImage from '../../assets/images/cover/reception.jpg';
+import receptionImage from '../../assets/images/newreception.png';
 
 const PageHeader = ({ title, subtitle, backgroundImage }) => {
   const bgImage = backgroundImage || receptionImage;

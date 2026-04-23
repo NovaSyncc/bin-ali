@@ -5,7 +5,7 @@ import GlassCard from '../components/shared/GlassCard';
 import ScrollReveal from '../components/shared/ScrollReveal';
 import EventBookingForm from '../components/EventBookingForm';
 import PageHeader from '../components/shared/PageHeader';
-import receptionImage from '../assets/images/cover/reception.jpg'; // Using for default background
+import receptionImage from '../assets/images/newreception.png';
 
 const EventsPage = () => {
   const [isEventFormOpen, setIsEventFormOpen] = useState(false);

@@ -2,7 +2,7 @@ import { MapPin, Phone, Mail, Clock, MessageCircle, Star } from 'lucide-react';
 import PageTransition from '../components/shared/PageTransition';
 import GlassCard from '../components/shared/GlassCard';
 import PageHeader from '../components/shared/PageHeader';
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
 import { getTranslation } from '../utils/translations';
 
 const ContactPage = ({ language = 'en' }) => {

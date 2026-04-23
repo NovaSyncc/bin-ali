@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import PageTransition from './shared/PageTransition';
 
 // Wedding Hall Video Assets
-import receptionImage from '../assets/images/cover/reception.jpg';
+import receptionImage from '../assets/images/newreception.png';
 
 const weddingHallsData = [
   {
