@@ -200,7 +200,7 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
         >
           <div className="hero-image-container">
             <div className="hero-slideshow">
-              {/* Reception images slideshow */}
+              {/* Fallback images shown while video loads */}
               {receptionImages.map((src, index) => (
                 <img
                   key={index}
@@ -210,6 +210,21 @@ const Hero = ({ onBookEventHall, language = 'en' }) => {
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
               ))}
+
+              {/* Video — plays over the fallback images */}
+              <div className="absolute inset-0 z-[1]">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={receptionImage}
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                >
+                  <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/0422(1).mp4" type="video/mp4" />
+                </video>
+              </div>
 
               {/* Dark overlay for readability */}
               <div className="hero-image-overlay"></div>
