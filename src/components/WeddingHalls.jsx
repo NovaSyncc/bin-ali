@@ -23,9 +23,9 @@ const weddingHallsData = [
       "Air conditioning"
     ],
     media: {
-      type: "video",
-      src: "https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/firsthall_lanscape.mp4",
-      poster: receptionImage, // Fallback image for video
+      type: "image",
+      src: receptionImage,
+      alt: "Grand Classic Hall",
       orientation: "landscape"
     }
   },
@@ -45,12 +45,10 @@ const weddingHallsData = [
       "Climate controlled"
     ],
     media: {
-      type: "video",
-      src: "https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/SecondHallPortrait.MP4",
-      poster: receptionImage,
+      type: "image",
+      src: receptionImage,
       alt: "Elegant Boutique Hall",
-      orientation: "portrait",
-      startTime: 3 // Start playback from 3 seconds
+      orientation: "portrait"
     }
   }
 ];

@@ -94,21 +94,11 @@ const EventsPage = () => {
           <ScrollReveal direction="up" delay={200}>
             <div className="max-w-4xl mx-auto premium-glass-card p-6">
               <div className="relative overflow-hidden rounded-xl shadow-lg aspect-video bg-slate-black">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls
-                  className="absolute top-0 left-0 w-full h-full"
-                  style={{
-                    objectFit: 'cover',
-                    objectPosition: 'center'
-                  }}
-                >
-                  <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/firsthall_lanscape.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <img
+                  src={receptionImage}
+                  alt="Past Events at Bin Ali Hotel"
+                  className="absolute top-0 left-0 w-full h-full object-cover object-center"
+                />
               </div>
             </div>
           </ScrollReveal>
@@ -142,21 +132,11 @@ const EventsPage = () => {
                   <span className="font-semibold text-soft-white">Capacity: 300-350 guests</span>
                 </div>
                 <div className="relative rounded-xl overflow-hidden shadow-lg aspect-video bg-slate-black">
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    controls
-                    className="absolute top-0 left-0 w-full h-full"
-                    style={{
-                      objectFit: 'cover',
-                      objectPosition: 'center'
-                    }}
-                  >
-                    <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/firsthall_lanscape.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  <img
+                    src={receptionImage}
+                    alt="Bin-Ali Hall One"
+                    className="absolute top-0 left-0 w-full h-full object-cover object-center"
+                  />
                 </div>
               </GlassCard>
             </ScrollReveal>
@@ -173,24 +153,11 @@ const EventsPage = () => {
                   <span className="font-semibold text-soft-white">Capacity: 300-350 guests</span>
                 </div>
                 <div className="relative rounded-xl overflow-hidden shadow-lg aspect-video bg-slate-black">
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    controls
-                    onLoadedMetadata={(e) => {
-                      e.target.currentTime = 3;
-                    }}
-                    className="absolute top-0 left-0 w-full h-full"
-                    style={{
-                      objectFit: 'contain',
-                      objectPosition: 'center'
-                    }}
-                  >
-                    <source src="https://pub-f156a8ea433d411abe69e341cc2b5977.r2.dev/videos/SecondHallPortrait.MP4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  <img
+                    src={receptionImage}
+                    alt="Bin-Ali Hall Two"
+                    className="absolute top-0 left-0 w-full h-full object-cover object-center"
+                  />
                 </div>
               </GlassCard>
             </ScrollReveal>
